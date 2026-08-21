@@ -1,6 +1,10 @@
-document.addEventListener("DOMContentLoaded", function () {
+function initSidebarResize() {
   var sidebar = document.querySelector(".md-sidebar--primary");
   if (!sidebar || window.innerWidth < 1220) return;
+  if (sidebar.querySelector(".sidebar-resize-handle")) return;
+
+  var saved = sessionStorage.getItem("sidebar-width");
+  if (saved) sidebar.style.width = saved;
 
   var handle = document.createElement("div");
   handle.className = "sidebar-resize-handle";
@@ -27,5 +31,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.removeEventListener("mouseup", onStop);
     document.body.style.userSelect = "";
     document.body.style.cursor = "";
+    sessionStorage.setItem("sidebar-width", sidebar.style.width);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", initSidebarResize);
+document.addEventListener("DOMContentSwitch", initSidebarResize);
+
+var observer = new MutationObserver(function () {
+  var sidebar = document.querySelector(".md-sidebar--primary");
+  if (sidebar && !sidebar.querySelector(".sidebar-resize-handle")) {
+    initSidebarResize();
   }
 });
+observer.observe(document.body, { childList: true, subtree: true });
