@@ -1,8 +1,8 @@
-site_name: LPIC-1 Complete Guide
+site_name: LPIC Complete Guide
 site_description: >-
-  Free, open study notes for the LPIC-1 certification, exams 101-500 and
-  102-500. Plain English, real command output, real config samples.
-site_url: https://AmraniCh.github.io/lpic1-complete-guide/
+  Open study notes for LPIC certifications. Plain English, real command
+  output, real config samples.
+site_url: https://lpic.amranich.dev/
 repo_url: https://github.com/AmraniCh/lpic1-complete-guide
 repo_name: lpic1-complete-guide
 edit_uri: edit/main/docs/
@@ -83,7 +83,9 @@ extra:
 
 nav:
   - Home: index.md
-  - Exam 101-500:
+  - LPIC-1:
+    - Overview: lpic-1.md
+    - Exam 101-500:
       - Overview: exam-101/index.md
       - 101 System Architecture:
           - 101.1 Determine and configure hardware settings: exam-101/101-system-architecture/101.1-hardware-settings.md
@@ -112,7 +114,7 @@ nav:
           - 104.5 Manage file permissions and ownership: exam-101/104-devices-filesystems-fhs/104.5-manage-file-permissions-and-ownership.md
           - 104.6 Create and change hard and symbolic links: exam-101/104-devices-filesystems-fhs/104.6-hard-and-symbolic-links.md
           - 104.7 Find system files and place files in the correct location: exam-101/104-devices-filesystems-fhs/104.7-find-system-files-and-fhs.md
-  - Exam 102-500:
+    - Exam 102-500:
       - Overview: exam-102/index.md
       - 105 Shells and Shell Scripting:
           - 105.1 Customize and use the shell environment: exam-102/105-shells-and-shell-scripting/105.1-customize-and-use-the-shell-environment.md

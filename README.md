@@ -1,13 +1,13 @@
-# LPIC-1 Complete Guide
+# LPIC Complete Guide
 
-Free, open study notes for the **LPIC-1** certification, covering both exams:
-**101-500** and **102-500**, objectives version 5.0.
+Open study notes for **LPIC** certifications. Currently covering
+**LPIC-1** (exams 101-500 and 102-500, objectives version 5.0).
 
 [![Publish site](https://github.com/AmraniCh/lpic1-complete-guide/actions/workflows/deploy.yml/badge.svg)](https://github.com/AmraniCh/lpic1-complete-guide/actions/workflows/deploy.yml)
 [![Checks](https://github.com/AmraniCh/lpic1-complete-guide/actions/workflows/checks.yml/badge.svg)](https://github.com/AmraniCh/lpic1-complete-guide/actions/workflows/checks.yml)
 [![Licence: MIT](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
 
-**Read it here:** <https://AmraniCh.github.io/lpic1-complete-guide/>
+**Read it here:** <https://lpic.amranich.dev/>
 
 ---
 
@@ -91,11 +91,11 @@ page on the site.
 
 ## Sources and thanks
 
-These notes were built while studying from two free resources, and both
-deserve the credit:
+The LPIC-1 notes were built while studying from two free resources, and
+both deserve the credit:
 
 - **[linux1st.com](https://linux1st.com)**, Jadi's free book and YouTube
-  course. The section order of most pages follows his.
+  course. The section order of most LPIC-1 pages follows his.
 - **The official LPI learning material** for objectives v5.0, published at
   [learning.lpi.org](https://learning.lpi.org).
 
