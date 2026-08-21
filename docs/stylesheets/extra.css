@@ -191,6 +191,14 @@
   border-radius: 3px;
 }
 
+[data-md-color-scheme="default"] .md-typeset .highlight .c,
+[data-md-color-scheme="default"] .md-typeset .highlight .c1,
+[data-md-color-scheme="default"] .md-typeset .highlight .ch,
+[data-md-color-scheme="default"] .md-typeset .highlight .cm,
+[data-md-color-scheme="default"] .md-typeset .highlight .cs {
+  color: var(--lp-ink-dim);
+}
+
 [data-md-color-scheme="default"] .md-typeset code {
   background-color: #f0efec;
 }
