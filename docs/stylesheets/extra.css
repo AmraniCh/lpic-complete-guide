@@ -21,12 +21,39 @@
 
   --lp-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono",
              Menlo, Consolas, "Liberation Mono", monospace;
+
 }
 
 /* ---- full-width layout ------------------------------------------------ */
 
 .md-grid {
   max-width: 100%;
+}
+
+/* ---- resizable sidebar handle ----------------------------------------- */
+
+.sidebar-resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+  transition: background 0.15s;
+  z-index: 10;
+}
+
+.sidebar-resize-handle:hover {
+  background: var(--lp-dir-deep);
+}
+
+[data-md-color-scheme="slate"] .sidebar-resize-handle:hover {
+  background: var(--lp-dir);
+}
+
+.md-sidebar__inner {
+  padding-right: 0.6rem !important;
 }
 
 /* ---- brand colours ---------------------------------------------------- */
