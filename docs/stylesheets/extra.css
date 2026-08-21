@@ -1,0 +1,241 @@
+/* ==========================================================================
+   LPIC-1 Complete Guide
+
+   The split is deliberate: the navigation rail is dark like a terminal, the
+   reading column is light like a rendered man page. That mirrors how the
+   reader actually works, terminal on one side and docs on the other.
+
+   The accent is ANSI cyan, the colour `ls` uses for directories, so it
+   marks structure and navigation throughout the site.
+   ========================================================================== */
+
+:root {
+  --lp-ink:      #11151b;
+  --lp-ink-2:    #171d25;
+  --lp-ink-3:    #222a35;
+  --lp-ink-text: #c3ccd8;
+  --lp-ink-dim:  #7a8494;
+
+  --lp-dir:      #4fd6c8;
+  --lp-dir-deep: #0f6b66;
+
+  --lp-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono",
+             Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+/* ---- full-width layout ------------------------------------------------ */
+
+.md-grid {
+  max-width: 100%;
+}
+
+/* ---- brand colours ---------------------------------------------------- */
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color:        var(--lp-ink);
+  --md-primary-fg-color--light: var(--lp-ink-2);
+  --md-primary-fg-color--dark:  #0b0e12;
+  --md-accent-fg-color:         var(--lp-dir-deep);
+  --md-typeset-a-color:         var(--lp-dir-deep);
+  --md-default-bg-color:        #fbfaf8;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: var(--lp-ink);
+  --md-accent-fg-color:  var(--lp-dir);
+  --md-typeset-a-color:  var(--lp-dir);
+  --md-default-bg-color: #12161c;
+}
+
+/* ---- headings --------------------------------------------------------- */
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-family: var(--lp-mono);
+  letter-spacing: -0.01em;
+}
+
+.md-typeset h1 {
+  font-weight: 600;
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset h2 {
+  font-weight: 600;
+  margin-top: 2.2em;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset h4 {
+  font-family: var(--lp-mono);
+  color: var(--lp-dir-deep);
+}
+
+[data-md-color-scheme="slate"] .md-typeset h4 {
+  color: var(--lp-dir);
+}
+
+/* ---- header ----------------------------------------------------------- */
+
+.md-header {
+  border-bottom: 1px solid var(--lp-ink-3);
+}
+
+.md-header__title {
+  font-family: var(--lp-mono);
+  font-weight: 600;
+}
+
+/* ---- dark navigation rail ---------------------------------------------
+   Material sizes the rail to its own content. Without stretching it, the
+   dark fill paints only a small box at the top of the column. Scoped to
+   wide screens, where the rail is actually a column.                      */
+
+@media screen and (min-width: 76.25em) {
+  [data-md-color-scheme="default"] .md-sidebar--primary {
+    background-color: var(--lp-ink);
+    align-self: stretch;
+    min-height: calc(100vh - 2.4rem);
+  }
+
+  /* Material gives the rail title its own light background. Left alone,
+     the light rail text sits on a light strip and becomes unreadable.    */
+  [data-md-color-scheme="default"] .md-sidebar--primary .md-nav__title {
+    background-color: var(--lp-ink);
+    color: var(--lp-ink-dim);
+    box-shadow: none;
+  }
+
+  [data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link {
+    color: var(--lp-ink-text);
+  }
+
+  [data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link:hover,
+  [data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link--active {
+    color: var(--lp-dir);
+  }
+
+  [data-md-color-scheme="default"] .md-sidebar--primary .md-nav__icon {
+    color: var(--lp-ink-dim);
+  }
+}
+
+/* ---- weight bars ------------------------------------------------------
+   Exam weight drawn as block characters. Real information, not decoration:
+   LPI draws questions in proportion to weight, so a weight 4 objective is
+   worth roughly four times the study time of a weight 1.                  */
+
+.md-nav__link[data-weight]::after {
+  font-family: var(--lp-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  margin-left: auto;
+  padding-left: 0.6em;
+  white-space: nowrap;
+  color: var(--lp-dir-deep);
+  opacity: 0.85;
+}
+
+@media screen and (min-width: 76.25em) {
+  [data-md-color-scheme="default"] .md-sidebar--primary
+    .md-nav__link[data-weight]::after {
+    color: var(--lp-dir);
+    opacity: 0.6;
+  }
+}
+
+.md-nav__link[data-weight="1"]::after { content: "\2588\00B7\00B7\00B7"; }
+.md-nav__link[data-weight="2"]::after { content: "\2588\2588\00B7\00B7"; }
+.md-nav__link[data-weight="3"]::after { content: "\2588\2588\2588\00B7"; }
+.md-nav__link[data-weight="4"]::after { content: "\2588\2588\2588\2588"; }
+.md-nav__link[data-weight="5"]::after { content: "\2588\2588\2588\2588\2588"; }
+
+/* ---- code ------------------------------------------------------------- */
+
+[data-md-color-scheme="default"] .md-typeset pre > code,
+[data-md-color-scheme="default"] .md-typeset .highlight {
+  background-color: var(--lp-ink);
+  color: var(--lp-ink-text);
+}
+
+[data-md-color-scheme="default"] .md-typeset .highlight {
+  border-radius: 3px;
+}
+
+[data-md-color-scheme="default"] .md-typeset code {
+  background-color: #f0efec;
+}
+
+/* ---- tables ----------------------------------------------------------- */
+
+.md-typeset table:not([class]) {
+  border: none;
+  font-size: 0.74rem;
+}
+
+.md-typeset table:not([class]) th {
+  font-family: var(--lp-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: transparent;
+  border-bottom: 2px solid var(--md-default-fg-color);
+}
+
+/* ---- coverage bar on the home page ------------------------------------ */
+
+.lp-progress {
+  height: 6px;
+  margin: 0.9rem 0 1.6rem;
+  border-radius: 3px;
+  background-color: var(--md-default-fg-color--lightest);
+  overflow: hidden;
+}
+
+.lp-progress__fill {
+  height: 100%;
+  background-color: var(--lp-dir-deep);
+}
+
+[data-md-color-scheme="slate"] .lp-progress__fill {
+  background-color: var(--lp-dir);
+}
+
+/* ---- status markers ---------------------------------------------------
+   Material shows a status icon beside each sidebar entry. Custom statuses
+   have no icon of their own, so give them one: a filled dot for a written
+   page, a hollow dot for one still waiting to be written.               */
+
+.md-status--written::after {
+  content: "\25CF";
+  mask-image: none;
+  -webkit-mask-image: none;
+  background-color: transparent;
+  color: var(--lp-dir-deep);
+  font-size: 0.5rem;
+  line-height: 1;
+}
+
+.md-status--stub::after {
+  content: "\25CB";
+  mask-image: none;
+  -webkit-mask-image: none;
+  background-color: transparent;
+  color: #b9a44b;
+  font-size: 0.5rem;
+  line-height: 1;
+}
+
+@media screen and (min-width: 76.25em) {
+  [data-md-color-scheme="default"] .md-sidebar--primary
+    .md-status--written::after {
+    color: var(--lp-dir);
+    opacity: 0.7;
+  }
+  [data-md-color-scheme="default"] .md-sidebar--primary
+    .md-status--stub::after {
+    color: #d8c36a;
+  }
+}

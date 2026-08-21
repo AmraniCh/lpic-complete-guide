@@ -1,0 +1,32 @@
+name: Suggest an improvement
+description: An existing page could be clearer, or is missing something
+title: "[Improve] "
+labels: ["enhancement"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Which page?
+      placeholder: "102.4, or a link"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of improvement?
+      options:
+        - "Needs a real world example"
+        - "Needs a diagram"
+        - "The English is too hard to follow"
+        - "A config sample or command output is missing"
+        - "Something else"
+    validations:
+      required: true
+
+  - type: textarea
+    id: detail
+    attributes:
+      label: Tell us more
+    validations:
+      required: true

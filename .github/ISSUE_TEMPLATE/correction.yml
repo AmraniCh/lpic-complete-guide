@@ -1,0 +1,44 @@
+name: Report a mistake
+description: Something on a page is wrong, unclear, or out of date
+title: "[Fix] "
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for catching this. Mistakes in study notes cost people exam
+        marks, so this is genuinely useful.
+
+  - type: input
+    id: page
+    attributes:
+      label: Which page?
+      description: The objective number, or paste the link
+      placeholder: "102.4, or https://.../102.4-debian-package-management/"
+    validations:
+      required: true
+
+  - type: textarea
+    id: whats-wrong
+    attributes:
+      label: What is wrong?
+      description: Quote the sentence if you can
+    validations:
+      required: true
+
+  - type: textarea
+    id: should-say
+    attributes:
+      label: What should it say instead?
+    validations:
+      required: false
+
+  - type: dropdown
+    id: fix-it
+    attributes:
+      label: Do you want to fix it yourself?
+      options:
+        - "Yes, I will open a pull request"
+        - "No, just reporting it"
+    validations:
+      required: true
