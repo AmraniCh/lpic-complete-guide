@@ -95,8 +95,15 @@ def check(path, text, weights):
                 "the style guide asks for prose"
             )
 
-    # 5. plain English
-    low = prose.lower()
+    # 5. plain English. The objective intro block (Description, Objectives,
+    #    Terms) is a verbatim quote of the official LPI objectives. Like
+    #    command output, it is external literal text, so it is exempt from
+    #    the plain-English rewrite rule.
+    prose_words = prose
+    intro = re.search(r"^#\s+.+?\n(.*?)(?=^#{2,}\s)", prose, re.S | re.M)
+    if intro and "**Objectives**" in intro.group(1):
+        prose_words = prose.replace(intro.group(1), "", 1)
+    low = prose_words.lower()
     for word, better in PLAINER.items():
         if re.search(rf"\b{re.escape(word)}\b", low):
             problems.append(f'"{word}" -> use "{better}"')
