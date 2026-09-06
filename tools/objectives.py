@@ -2,8 +2,8 @@
 Single source of truth for the LPIC-1 objective map.
 
 Everything else reads from this file: the navigation, the weight bars in
-the sidebar, the coverage table on the home page, and the stub generator.
-Change an objective here and the whole site follows.
+the sidebar, and the stub generator. Change an objective here and the whole
+site follows.
 
 Weights are the official LPI weights for objectives version 5.0:
 https://www.lpi.org/our-certifications/exam-101-102-objectives/

@@ -32,14 +32,12 @@ Open <http://127.0.0.1:8000>. Pages reload as you save them.
 ```
 tools/                 All project scripts live here.
   objectives.py          One source of truth: all 42 objectives and weights.
-                         The nav, the weight bars, and the coverage table all
-                         read from here.
+                         The nav and the weight bars read from here.
   scaffold.py            Creates a page for every objective. Copies in the ones
                          already written, makes a stub for the rest. Safe to
                          re-run: it never overwrites a finished page.
   hooks.py               Runs at build time. Adds the weight bars to the
-                         sidebar, and rewrites the coverage table from what is
-                         actually on disk.
+                         sidebar.
   check_style.py         Enforces the house style in CI: plain English, no em
                          dashes, a prose Summary, correct front matter.
 

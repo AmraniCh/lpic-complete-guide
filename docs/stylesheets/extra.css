@@ -219,25 +219,6 @@
   border-bottom: 2px solid var(--md-default-fg-color);
 }
 
-/* ---- coverage bar on the home page ------------------------------------ */
-
-.lp-progress {
-  height: 6px;
-  margin: 0.9rem 0 1.6rem;
-  border-radius: 3px;
-  background-color: var(--md-default-fg-color--lightest);
-  overflow: hidden;
-}
-
-.lp-progress__fill {
-  height: 100%;
-  background-color: var(--lp-dir-deep);
-}
-
-[data-md-color-scheme="slate"] .lp-progress__fill {
-  background-color: var(--lp-dir);
-}
-
 /* ---- status markers ---------------------------------------------------
    Material shows a status icon beside each sidebar entry. Custom statuses
    have no icon of their own, so give them one: a filled dot for a written

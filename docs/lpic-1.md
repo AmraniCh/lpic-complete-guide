@@ -5,10 +5,6 @@ Exams **101-500** and **102-500**, objectives version 5.0.
 Two exams, 60 questions each, 90 minutes each. Pass both to earn the
 LPIC-1 certification.
 
-## Coverage
-
-<!-- COVERAGE -->
-
 ## Where to start
 
 New to LPIC-1? Start at
