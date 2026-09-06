@@ -20,8 +20,8 @@ page has loaded.
 
 ## Help wanted
 
-Most objectives are still unwritten. Every page marked **help wanted** is
-free to claim.
+Exam 101 is fully written. Every objective in exam 102 is still unwritten,
+and every page marked **help wanted** is free to claim.
 
 If you are studying for this exam anyway, writing a page is one of the best
 ways to actually learn it. Read the [contributor guide](contributing.md)

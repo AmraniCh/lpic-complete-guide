@@ -3,8 +3,8 @@
 Open study notes for **LPIC** certifications. Currently covering
 **LPIC-1** (exams 101-500 and 102-500, objectives version 5.0).
 
-[![Publish site](https://github.com/AmraniCh/lpic1-complete-guide/actions/workflows/deploy.yml/badge.svg)](https://github.com/AmraniCh/lpic1-complete-guide/actions/workflows/deploy.yml)
-[![Checks](https://github.com/AmraniCh/lpic1-complete-guide/actions/workflows/checks.yml/badge.svg)](https://github.com/AmraniCh/lpic1-complete-guide/actions/workflows/checks.yml)
+[![Publish site](https://github.com/AmraniCh/lpic-complete-guide/actions/workflows/deploy.yml/badge.svg)](https://github.com/AmraniCh/lpic-complete-guide/actions/workflows/deploy.yml)
+[![Checks](https://github.com/AmraniCh/lpic-complete-guide/actions/workflows/checks.yml/badge.svg)](https://github.com/AmraniCh/lpic-complete-guide/actions/workflows/checks.yml)
 [![Licence: MIT](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
 
 **Read it here:** <https://lpic.amranich.dev/>
@@ -14,15 +14,16 @@ Open study notes for **LPIC** certifications. Currently covering
 
 ## Status
 
-**9 of 42 objectives written.** Topics 101 and 102 are complete. Everything
-else is a stub, and **every stub is free to claim**.
+**23 of 42 objectives written.** Exam 101 is complete (topics 101 to 104).
+Every objective in exam 102 is still a stub, and **every stub is free to
+claim**.
 
 | Exam | Topic | Objectives | Weight | Written |
 |---|---|---|---|---|
 | 101 | 101 System Architecture | 3 | 8 | done |
 | 101 | 102 Installation and Package Management | 6 | 12 | done |
-| 101 | 103 GNU and Unix Commands | 8 | 26 | help wanted |
-| 101 | 104 Devices, Filesystems, FHS | 6 | 14 | help wanted |
+| 101 | 103 GNU and Unix Commands | 8 | 26 | done |
+| 101 | 104 Devices, Filesystems, FHS | 6 | 14 | done |
 | 102 | 105 Shells and Shell Scripting | 2 | 8 | help wanted |
 | 102 | 106 User Interfaces and Desktops | 3 | 4 | help wanted |
 | 102 | 107 Administrative Tasks | 3 | 12 | help wanted |
@@ -36,8 +37,8 @@ is never out of date.
 ## Run it locally
 
 ```bash
-git clone https://github.com/AmraniCh/lpic1-complete-guide.git
-cd lpic1-complete-guide
+git clone https://github.com/AmraniCh/lpic-complete-guide.git
+cd lpic-complete-guide
 
 python3 -m venv .venv
 source .venv/bin/activate

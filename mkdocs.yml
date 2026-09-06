@@ -3,8 +3,8 @@ site_description: >-
   Open study notes for LPIC certifications. Plain English, real command
   output, real config samples.
 site_url: https://lpic.amranich.dev/
-repo_url: https://github.com/AmraniCh/lpic1-complete-guide
-repo_name: lpic1-complete-guide
+repo_url: https://github.com/AmraniCh/lpic-complete-guide
+repo_name: lpic-complete-guide
 edit_uri: edit/main/docs/
 copyright: Released under the MIT licence.
 
@@ -81,7 +81,7 @@ extra:
 
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/AmraniCh/lpic1-complete-guide
+      link: https://github.com/AmraniCh/lpic-complete-guide
       name: This project on GitHub
 
 nav:

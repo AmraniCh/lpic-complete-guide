@@ -10,13 +10,13 @@ GitHub. No setup needed.
 
 ## Writing an objective
 
-1. Open a [claim issue](https://github.com/AmraniCh/lpic1-complete-guide/issues/new/choose)
+1. Open a [claim issue](https://github.com/AmraniCh/lpic-complete-guide/issues/new/choose)
    so nobody duplicates your work.
 2. Clone and run locally:
 
     ```bash
-    git clone https://github.com/AmraniCh/lpic1-complete-guide.git
-    cd lpic1-complete-guide
+    git clone https://github.com/AmraniCh/lpic-complete-guide.git
+    cd lpic-complete-guide
     python3 -m venv .venv && source .venv/bin/activate
     pip install -r requirements.txt
     mkdocs serve
@@ -37,5 +37,5 @@ from what the exam actually tests.
 ## Licence
 
 By contributing you agree your work is released under the
-[MIT licence](https://github.com/AmraniCh/lpic1-complete-guide/blob/main/LICENSE).
+[MIT licence](https://github.com/AmraniCh/lpic-complete-guide/blob/main/LICENSE).
 Write in your own words -- do not paste from copyrighted material.

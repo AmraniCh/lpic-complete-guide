@@ -52,7 +52,7 @@ status: written
 ## Front matter
 
 - `objective` and `weight` must match
-  [objectives.py](https://github.com/AmraniCh/lpic1-complete-guide/blob/main/tools/objectives.py).
+  [objectives.py](https://github.com/AmraniCh/lpic-complete-guide/blob/main/tools/objectives.py).
 - Set `status` to `written` when the page is finished.
 
 ## Checklist
