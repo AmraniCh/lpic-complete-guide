@@ -76,7 +76,7 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         if r["done"] == r["total"]:
             mark = "done"
         elif r["done"] == 0:
-            mark = "**help wanted**"
+            mark = "planned"
         else:
             mark = f"{r['done']} of {r['total']}"
         out.append(f"| {r['num']} {r['name']} | {r['total']} | {r['total_w']} | {mark} |")

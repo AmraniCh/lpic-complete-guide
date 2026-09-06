@@ -3,8 +3,7 @@
 Generate the docs tree from objectives.py.
 
 Objectives that are already written get copied in from their source file.
-Everything else gets a stub telling a contributor exactly what to write and
-which sources to use.
+Everything else gets a short stub that marks the page as not written yet.
 
 Safe to re-run: a page whose front matter says `status: written` is never
 overwritten.
@@ -40,43 +39,11 @@ status: stub
 
 # {obj} {title}
 
-!!! warning "Not written yet"
+!!! note "Not written yet"
 
-    This page is a placeholder. Nobody has written it yet, and it could be
-    you. See the [contributor guide](../../contributing.md) to get started,
-    and the [style guide](../../style-guide.md) for how pages are written
-    here.
+    Notes for this objective have not been written yet.
 
 **Exam weight: {weight}.** {weight_note}
-
-## What this page needs
-
-Write it from these two sources, and only these two:
-
-1. The matching page on [linux1st.com](https://linux1st.com), Jadi's free
-   book. Follow its section order exactly.
-2. The matching section of the official LPI learning material for
-   objectives v5.0.
-
-Then follow the [style guide](../../style-guide.md). In short:
-
-- Plain English, short sentences. Many readers are not native speakers.
-- Include the real config samples and command output from the sources. Do
-  not just describe them.
-- Add an ASCII diagram for anything long or hard to picture.
-- Explain hard options with a real world example, not just a definition.
-- End with a Summary written as prose, not a list.
-
-When the page is done, change `status: stub` to `status: written` in the
-front matter at the top. The coverage table on the home page counts it
-automatically.
-
-## Scope
-
-The key knowledge areas, and the list of files, terms and utilities for
-this objective, are on the
-[LPI objectives page](https://www.lpi.org/our-certifications/exam-101-102-objectives/).
-Cover what LPI lists there. Nothing more is required.
 """
 
 WEIGHT_NOTE = {

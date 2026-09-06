@@ -12,28 +12,6 @@ Open study notes for **LPIC** certifications. Currently covering
 ---
 
 
-## Status
-
-**23 of 42 objectives written.** Exam 101 is complete (topics 101 to 104).
-Every objective in exam 102 is still a stub, and **every stub is free to
-claim**.
-
-| Exam | Topic | Objectives | Weight | Written |
-|---|---|---|---|---|
-| 101 | 101 System Architecture | 3 | 8 | done |
-| 101 | 102 Installation and Package Management | 6 | 12 | done |
-| 101 | 103 GNU and Unix Commands | 8 | 26 | done |
-| 101 | 104 Devices, Filesystems, FHS | 6 | 14 | done |
-| 102 | 105 Shells and Shell Scripting | 2 | 8 | help wanted |
-| 102 | 106 User Interfaces and Desktops | 3 | 4 | help wanted |
-| 102 | 107 Administrative Tasks | 3 | 12 | help wanted |
-| 102 | 108 Essential System Services | 4 | 12 | help wanted |
-| 102 | 109 Networking Fundamentals | 4 | 14 | help wanted |
-| 102 | 110 Security | 3 | 10 | help wanted |
-
-The site rebuilds this table automatically from the pages themselves, so it
-is never out of date.
-
 ## Run it locally
 
 ```bash
@@ -69,26 +47,8 @@ docs/                  The pages themselves.
   index.md               Home
   exam-101/, exam-102/   One folder per topic
   style-guide.md         How pages are written here
-  contributing.md        How to help
   stylesheets/           The terminal skin
 ```
-
-## Contributing
-
-Every unwritten objective is free to claim, and **you do not need to be an
-expert.** If you are studying for LPIC-1 right now, writing a page is one of
-the best ways to actually learn it.
-
-1. Read the **[style guide](docs/style-guide.md)**. It is short.
-2. Claim an objective by opening an issue, so nobody duplicates your work.
-3. Write the page, then change `status: stub` to `status: written`.
-4. Run `mkdocs build --strict` and `python3 tools/check_style.py`.
-5. Open a pull request.
-
-Full details in **[CONTRIBUTING.md](CONTRIBUTING.md)**.
-
-Fixing a typo needs no setup at all: click the pencil icon at the top of any
-page on the site.
 
 ## Sources and thanks
 
@@ -100,8 +60,8 @@ both deserve the credit:
 - **The official LPI learning material** for objectives v5.0, published at
   [learning.lpi.org](https://learning.lpi.org).
 
-Pages are written in contributors' own words. Please keep it that way: facts
-and ideas are free to use, exact wording is not.
+Pages are written in my own words: facts and ideas are free to use, exact
+wording is not.
 
 ## Licence
 

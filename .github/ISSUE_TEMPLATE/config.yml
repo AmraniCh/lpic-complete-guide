@@ -1,8 +1,0 @@
-blank_issues_enabled: true
-contact_links:
-  - name: How to contribute
-    url: https://github.com/AmraniCh/lpic-complete-guide/blob/main/CONTRIBUTING.md
-    about: Setup steps and how the project works
-  - name: Official LPI objectives
-    url: https://www.lpi.org/our-certifications/exam-101-102-objectives/
-    about: The official exam objectives this guide follows

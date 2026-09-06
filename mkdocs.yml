@@ -77,7 +77,7 @@ extra:
   # can see at a glance which objectives still need writing.
   status:
     written: Written
-    stub: Not written yet, help wanted
+    stub: Not written yet
 
   social:
     - icon: fontawesome/brands/github
@@ -144,5 +144,4 @@ nav:
           - 110.1 Perform security administration tasks: exam-102/110-security/110.1-perform-security-administration-tasks.md
           - 110.2 Setup host security: exam-102/110-security/110.2-setup-host-security.md
           - 110.3 Securing data with encryption: exam-102/110-security/110.3-securing-data-with-encryption.md
-  - Contributing: contributing.md
   - Style guide: style-guide.md

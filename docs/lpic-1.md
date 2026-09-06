@@ -18,16 +18,6 @@ and work down the sidebar in order.
 Revising? Use the search box at the top. It keeps working offline once the
 page has loaded.
 
-## Help wanted
-
-Exam 101 is fully written. Every objective in exam 102 is still unwritten,
-and every page marked **help wanted** is free to claim.
-
-If you are studying for this exam anyway, writing a page is one of the best
-ways to actually learn it. Read the [contributor guide](contributing.md)
-to get started, and the [style guide](style-guide.md) for how pages are
-written here.
-
 ## Sources
 
 The LPIC-1 notes were built while studying from two free resources, and
