@@ -1,7 +1,7 @@
 site_name: LPIC Complete Guide
 site_description: >-
-  Open study notes for LPIC certifications. Plain English, real command
-  output, real config samples.
+  My study notes for taking the LPIC certifications, written with Claude
+  Opus 4.8 under my concise guidance.
 site_url: https://lpic.amranich.dev/
 repo_url: https://github.com/AmraniCh/lpic-complete-guide
 repo_name: lpic-complete-guide
