@@ -1,3 +1,7 @@
+---
+description: "LPIC-1 certification study notes covering both exams, 101-500 and 102-500, objectives version 5.0, with real commands and examples."
+---
+
 # LPIC-1
 
 Exams **101-500** and **102-500**, objectives version 5.0.

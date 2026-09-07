@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{#
+  Add Open Graph and Twitter Card meta tags so links show a proper title and
+  description when shared. Material does not emit these without the social
+  plugin, and the social plugin needs image build dependencies we do not want,
+  so these lightweight tags fill the gap (no preview image).
+#}
+{% block extrahead %}
+  {% set og_title = config.site_name %}
+  {% if page and page.title and not page.is_homepage %}
+    {% set og_title = page.title ~ " - " ~ config.site_name %}
+  {% endif %}
+  {% set og_desc = config.site_description %}
+  {% if page and page.meta and page.meta.description %}
+    {% set og_desc = page.meta.description %}
+  {% endif %}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ config.site_name }}">
+  <meta property="og:title" content="{{ og_title }}">
+  <meta property="og:description" content="{{ og_desc }}">
+  {% if page.canonical_url %}<meta property="og:url" content="{{ page.canonical_url }}">{% endif %}
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ og_title }}">
+  <meta name="twitter:description" content="{{ og_desc }}">
+{% endblock %}

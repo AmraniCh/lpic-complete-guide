@@ -1,3 +1,7 @@
+---
+description: "LPIC-1 exam 102-500 study notes: shells and scripting, desktops, administrative tasks, system services, networking, and security."
+---
+
 # Exam 102-500
 
 The second of the two exams needed for LPIC-1. 60 questions, 90 minutes.

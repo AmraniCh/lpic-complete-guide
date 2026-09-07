@@ -1,3 +1,7 @@
+---
+description: "LPIC-1 exam 101-500 study notes: system architecture, installation and package management, GNU and Unix commands, devices and filesystems."
+---
+
 # Exam 101-500
 
 The first of the two exams needed for LPIC-1. 60 questions, 90 minutes.
