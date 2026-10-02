@@ -3,8 +3,8 @@
 My study notes for taking the **LPIC** certifications, written with
 **Claude Opus 4.8** under my concise guidance.
 
-Currently covering **LPIC-1** (exams 101-500 and 102-500, objectives
-version 5.0).
+**LPIC-1** is complete: every objective for both exams (101-500 and
+102-500), version 5.0.
 
 [![Publish site](https://github.com/AmraniCh/lpic-complete-guide/actions/workflows/deploy.yml/badge.svg)](https://github.com/AmraniCh/lpic-complete-guide/actions/workflows/deploy.yml)
 [![Checks](https://github.com/AmraniCh/lpic-complete-guide/actions/workflows/checks.yml/badge.svg)](https://github.com/AmraniCh/lpic-complete-guide/actions/workflows/checks.yml)
