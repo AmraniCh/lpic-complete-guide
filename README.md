@@ -1,7 +1,6 @@
 # LPIC Complete Guide
 
-My study notes for taking the **LPIC** certifications, written with
-**Claude Opus 4.8** under my concise guidance.
+My study notes for preparing for the LPIC certifications, written as a concise and structured reference.
 
 **LPIC-1** is complete: every objective for both exams (101-500 and
 102-500), version 5.0.
