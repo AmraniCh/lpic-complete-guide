@@ -57,6 +57,8 @@ modprobe -r iwlwifi            # unload a module
 # rules in /etc/udev/rules.d/
 # char device (c) = byte by byte (keyboard, terminal)
 # block device (b) = data in chunks (disk, USB)
+
+lshw                           # list ALL hardware in one detailed report (run as root)
 ```
 
 ---
@@ -102,7 +104,7 @@ systemctl enable sshd                   # start on boot
 systemctl disable sshd                  # do not start on boot
 systemctl status sshd                   # show service status
 systemctl is-active sshd                # quick check: active or not
-systemctl is-system-running
+systemctl is-system-running             # overall system state (running / degraded)
 systemctl --failed                      # list failed units
 
 # UNIT FILE LOCATIONS (sorted by priority, first wins)
@@ -324,7 +326,7 @@ rpm -V nginx                   # -V (verify): check if files were modified
 rpm -K package.rpm             # -K (checksig): verify .rpm file signature
 
 # rpm2cpio (extract files from .rpm without installing)
-rpm2cpio package.rpm | cpio -idv
+rpm2cpio package.rpm | cpio -idv # cpio: -i extract, -d make dirs, -v verbose
 
 # zypper (SUSE)
 zypper install nginx           # or: zypper in nginx
@@ -421,34 +423,34 @@ uname                          # -s (kernel name), -n hostname, -r kernel releas
 ## 103.2 - Process text streams using filters
 
 ```bash
-od -c textfile
-od -a textfile
+od -c textfile # -c: show bytes as characters / C escapes (\n, \t)
+od -a textfile # -a: show bytes as named characters (nl, sp, ...)
 
-split -l 2 -d mybigfile my_prefix # l=number (lines)
-split -n 2 -d mybigfile my_prefix # n=number (chunks)
+split -l 2 -d mybigfile my_prefix # -l 2: new file every 2 LINES | -d: numeric suffixes (00, 01)
+split -n 2 -d mybigfile my_prefix # -n 2: split into 2 CHUNKS | -d: numeric suffixes
 
-cut -d, -f 1 data.txt # -d delimiter, -f field number
+cut -d, -f 1 data.txt # -d (delimiter) , | -f (field): keep field 1
 
-sort mytest # -n numerical, -r reverse
+sort mytest # sort lines alphabetically. -n (numeric) | -r (reverse)
 
-sort data.txt | uniq -c # -c count of each item, -u show only non repeated, -d show only repeated (-u is opposite of -d)
+sort data.txt | uniq -c # uniq needs SORTED input. -c count each line | -u only unique | -d only duplicated
 
-paste file1 file2 # side by side
+paste file1 file2 # join files side by side (column by column)
 
-echo "chakir" | tr c s
-echo "sss ccdd fdfds sss aaa" | tr -s 'sss' # -s squeeze
+echo "chakir" | tr c s # tr SET1 SET2: replace every 'c' with 's' -> "shakir"
+echo "sss ccdd fdfds sss aaa" | tr -s 'sss' # -s (squeeze): collapse repeats of 's' into one
 
-sed 's/a/@/' data.txt # 's' replaced by 'a'
-sed /a/d data.txt # remove lines that contains 'a'
-sed -n /a/p data.txt # -n tells sed to print nothing, 'p' prints only what matched, lines that contains 'a'
-sed -e 's/apple/APPLE/' -e 's/cherry/CHERRY/' fruit.txt
+sed 's/a/@/' data.txt # s/old/new/: replace FIRST 'a' with '@' per line (add trailing g for all)
+sed /a/d data.txt # /pattern/d: delete lines that contain 'a'
+sed -n /a/p data.txt # -n: print nothing by default | /a/p: print only lines matching 'a'
+sed -e 's/apple/APPLE/' -e 's/cherry/CHERRY/' fruit.txt # -e: run several edits in one pass
 
-wc mydata
+wc mydata # count lines, words, characters. -l (lines) -w (words) -c (chars)
   # 9  25 121 mydata
   # lines words characters mydata
 
-sha256sum data.txt > hash1
-sha256sum -c hash1
+sha256sum data.txt > hash1 # compute the checksum and save it to hash1
+sha256sum -c hash1 # -c (check): verify the files still match the saved checksums
 ```
 
 ---
@@ -456,35 +458,35 @@ sha256sum -c hash1
 ## 103.3 - File Management
 
 ```bash
-cp -i myfile1 myfile2 # -i interactive (do you want to overwrite ...), -p preserve attributes
-mv -i myfile1 myfile2 # -i interactive (do you want to overwrite ...)
-rm myfile
+cp -i myfile1 myfile2 # -i interactive (ask before overwrite). -p preserve attributes
+mv -i myfile1 myfile2 # -i interactive (ask before overwrite). moves or renames
+rm myfile # remove a file. -r (recursive) for dirs, -f (force) no prompts
 
-touch file2
-touch -d 11am file2 # -d date
-touch -t 200908121510.59 file2 # -t timestamp
-touch -r file1 file2 # -r reference
-touch -am file3 # -a access time, -m modification time
+touch file2 # create empty file, or update timestamps if it exists
+touch -d 11am file2 # -d (date): set time from a human-readable date
+touch -t 200908121510.59 file2 # -t (timestamp): set time as [[CC]YY]MMDDhhmm[.ss]
+touch -r file1 file2 # -r (reference): copy file1's timestamp onto file2
+touch -am file3 # -a (access time) -m (modification time): update these
 
 dd if=/dev/sda of=backup.dd bs=4096 # if (input file), of (output file), bs (block size)
 
-find ~ -iname "hel*" # -iname: name case insensitive
-find ~ -iname "hel*" -type f # -type f: type file
-find ~/test -size +10M # file more than 10 megabytes
-find ~ -mmin -30 -ls # show last modified files in ~ 30 min ago
+find ~ -iname "hel*" # -iname: match name, case insensitive (-name = case sensitive)
+find ~ -iname "hel*" -type f # -type f: regular files only (d = directory)
+find ~/test -size +10M # -size +10M: larger than 10 megabytes
+find ~ -mmin -30 -ls # -mmin -30: modified < 30 min ago. -ls: long listing
 
-gzip file.txt # bzip2, xz
-gunzip file.txt.gz # bunzip2, unxz
+gzip file.txt # compress -> file.txt.gz (removes original). also bzip2, xz
+gunzip file.txt.gz # decompress -> file.txt. also bunzip2, unxz
 
-tar -czf archive.tar.gz hash1 hash2
-tar -xf archive.tar
-tar -xf archive.tar -C /tmp
+tar -czf archive.tar.gz hash1 hash2 # -c (create) -z (gzip) -f (file): build the archive
+tar -xf archive.tar # -x (extract) -f (file): unpack here
+tar -xf archive.tar -C /tmp # -C (change dir): extract into /tmp
 
-ls | cpio -o > files.cpio
-mkdir extract
+ls | cpio -o > files.cpio # -o (copy-out): build an archive from a list of names
+mkdir extract # (plumbing: a folder to extract into)
 mv myarchivefind.cpio extract
 cd extract
-cpio -id < files.cpio
+cpio -id < files.cpio # -i (copy-in): extract. -d: create directories as needed
 ```
 
 ---
@@ -495,10 +497,10 @@ cpio -id < files.cpio
 # tr ' ' '@' <<END # here-documents
 # cat <<END > file1
 
-echo files.txt | xargs cat
-cat files.txt | xargs -I FILE touch _FILE.txt
+echo files.txt | xargs cat # xargs: turn stdin into ARGUMENTS (here runs: cat files.txt)
+cat files.txt | xargs -I FILE touch _FILE.txt # -I FILE: placeholder, run once per input line
 
-ls | tee files.txt # tee add the output to the file but also redirect it to stdout (ls > files.txt don't output in stdout)
+ls | tee files.txt # tee: write to the file AND still show on stdout (unlike ls > files.txt)
 ```
 
 ---
@@ -506,32 +508,32 @@ ls | tee files.txt # tee add the output to the file but also redirect it to stdo
 ## 103.5 - Process Management
 
 ```bash
-xeyes # ctrl + z
-xclock # ctrl + z
-jobs -l # -l: process id
-fg %1
-bg %2
+xeyes # run a GUI app, then Ctrl+Z to suspend it (stops it, keeps the job)
+xclock # another GUI app. Ctrl+Z suspends it -> becomes a stopped job
+jobs -l # list this shell's jobs. -l (long): also show the PID
+fg %1 # bring job 1 to the FOREGROUND
+bg %2 # resume job 2 in the BACKGROUND
 
-kill -9 2387 # -9: kill, -1 hup, -15 term (normal termination)
-killall python # kill all python 'command' processes (default -15 normal termination)
-pkill slee # match pattern
+kill -9 2387 # send a signal to a PID. -9 KILL (force), -1 HUP, -15 TERM (default, clean)
+killall python # kill BY NAME: every process named python (default signal -15)
+pkill slee # kill by name PATTERN (partial match)
 
-ps -ef # (UNIX style) -e all processes, -f full format
-ps aux # (BSD style)
-ps -u admin # --user
+ps -ef # (UNIX style) -e (all processes) -f (full format)
+ps aux # (BSD style) a (all users) u (user-oriented) x (incl. no tty)
+ps -u admin # -u (user): processes owned by admin
 
-pgrep sleep | xargs kill
+pgrep sleep | xargs kill # pgrep: find PIDs by name, then pipe them to kill
 
-top # q (quit), M (sort by memory usage), k (kill after asking PID)
+top # live process view. q (quit), M (sort by memory), k (kill, asks for PID)
 
-free # -m (mega), -h (human), -g (giga)
+free # show memory usage. -m (MB), -h (human), -g (GB)
 
-uptime
+uptime # time, number of users, and load average (1, 5, 15 min)
 # 21:18:52 up  1:34,  5 users,  load average: 2.38, 2.64, 2.41
 
-watch free
-watch 'df -h | grep nvme0n1p1'
-watch -n .5 free -b # -n (interval)
+watch free # re-run 'free' every 2s and show the latest output
+watch 'df -h | grep nvme0n1p1' # quote the whole pipeline so watch runs all of it
+watch -n .5 free -b # -n (interval): every 0.5s. -b: show bytes
 ```
 
 ---
@@ -539,20 +541,20 @@ watch -n .5 free -b # -n (interval)
 ## 103.5 - Terminal Multiplexers
 
 ```bash
-screen
-screen -d # detach, or CTRL + a D
-screen -ls
-screen -r 8475 # reattach
+screen # start a new screen session (keeps running after you disconnect)
+screen -d # -d: detach the session (or from inside: CTRL + a D)
+screen -ls # -ls: list running sessions
+screen -r 8475 # -r: reattach to session 8475
 # kill with CTRL + a K
 
-tmux
+tmux # start a new tmux session
 # CTRL + B % => open new vertical
 # CTRL + B " => open new horizontally
 # CTRL + B D => detach
 # CTRL + B & => kill
 # CTRL + B -> <- => navigation
-tmux ls
-tmux att -t 1 # attach to session 1 (-t means target)
+tmux ls # list sessions
+tmux att -t 1 # att (attach) -t (target): attach to session 1
 ```
 
 ---
