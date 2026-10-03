@@ -15,27 +15,27 @@ set -b # -b: tell me at once when a background job ends
 set -e # -e (errexit): stop the script at the first failing command
 
 env -u LANG my_command # -u (unset): run my_command without the LANG variable
-env -i bash # -i (ignore): start bash with an empty environment
-printenv # show all environment variables
-printenv USER # show one variable
+env -i bash            # -i (ignore): start bash with an empty environment
+printenv               # show all environment variables
+printenv USER          # show one variable
 
-friend=naruto # create a local variable
+friend=naruto     # create a local variable
 set | grep friend # show the variable
-unset friend # remove it
+unset friend      # remove it
 
 export friend=nagato # exported: child processes see it too
 
 source config.sh # run config.sh in the current shell
-. config.sh # same as source
+. config.sh      # same as source
 
-alias # list all aliases
+alias                         # list all aliases
 alias testping="ping 8.8.8.8" # create an alias
 
 funnyls () {
     ls -ltrh # -l (long) -t (time sort) -r (reverse) -h (human sizes)
     echo "This is a funny ls"
 }
-funnyls # call the function
+funnyls      # call the function
 ```
 
 ```bash
@@ -65,13 +65,13 @@ funnyls # call the function
 cd /tmp; ls; pwd # ; run one after the other, always
 
 cd /tmp && ls # && run ls only if cd worked
-FILES=$(ls) # put the output of ls in a variable
-FILES=`ls` # same, old style (backticks)
+FILES=$(ls)   # put the output of ls in a variable
+FILES=`ls`    # same, old style (backticks)
 
 exec ping 8.8.8.8 # replace the shell with ping. when ping ends, the shell is gone
 
-test -s filename # -s (size): file exist && size > 0
-test -d /tmp # -d (directory): is a directory
+test -s filename  # -s (size): file exist && size > 0
+test -d /tmp      # -d (directory): is a directory
 test -x script.sh # -x (execute): file is executable
 
 read name age # read 2 words into 2 variables
@@ -80,7 +80,7 @@ echo $name:$age
 read -t 3 -p "entrez votre nom: " nom # -t (timeout) 3 sec | -p (prompt) text
 echo $nom
 
-expr 5 + 3 # shows 8
+expr 5 + 3  # shows 8
 expr 5 \* 4 # shows 20
 
 let result=10+3 # result = 13
@@ -114,16 +114,16 @@ The graphical stack, from top (user) to bottom (hardware):
 ```
 
 ```bash
-Xorg -configure # old command to generate config, nowadays X11 autodetects hardware
-/etc/X11/xorg.conf # main X config file
+Xorg -configure       # old command to generate config, nowadays X11 autodetects hardware
+/etc/X11/xorg.conf    # main X config file
 /etc/X11/xorg.conf.d/ # X config snippets
-~/.xsession-errors # X errors of your session
+~/.xsession-errors    # X errors of your session
 # VESA = generic fallback graphics driver, works on any card but basic only (no acceleration)
 
 
-xhost # show who may connect to your X server
-xhost + # + : allow every host (insecure)
-xhost - # - : only hosts in the list
+xhost                # show who may connect to your X server
+xhost +              # + : allow every host (insecure)
+xhost -              # - : only hosts in the list
 xhost +192.168.45.28 # allow one host
 
 xauth list # show X auth cookies
@@ -319,10 +319,10 @@ xauth list # show X auth cookies
 # ===== CRON =====
 
 # crontab (user's own scheduled jobs)
-crontab -e              # -e (edit): edit your crontab
-crontab -l              # -l (list): show your crontab
-crontab -r              # -r (remove): delete your crontab
-crontab -u bob -e       # -u (user): edit another user's crontab (root)
+crontab -e        # -e (edit): edit your crontab
+crontab -l        # -l (list): show your crontab
+crontab -r        # -r (remove): delete your crontab
+crontab -u bob -e # -u (user): edit another user's crontab (root)
 
 # CRONTAB TIME FORMAT (5 fields + command)
 #   min  hour  day-of-month  month  day-of-week  command
@@ -359,19 +359,19 @@ crontab -u bob -e       # -u (user): edit another user's crontab (root)
 #   (allow takes priority; if neither exists, usually all allowed)
 
 # ===== AT (one-time jobs) =====
-at 5pm                 # schedule a job for 5pm (then type commands, Ctrl+D)
-at now + 2 hours       # run 2 hours from now
-at 10:00 tomorrow      # specific time
-atq                    # list pending at jobs (q = queue)
-atrm 3                 # remove at job number 3 (rm = remove)
-at -f script.sh 5pm    # -f (file): run a script file at a time
+at 5pm              # schedule a job for 5pm (then type commands, Ctrl+D)
+at now + 2 hours    # run 2 hours from now
+at 10:00 tomorrow   # specific time
+atq                 # list pending at jobs (q = queue)
+atrm 3              # remove at job number 3 (rm = remove)
+at -f script.sh 5pm # -f (file): run a script file at a time
 
 # WHO CAN USE AT
 #   /etc/at.allow   /etc/at.deny   (same logic as cron.allow/cron.deny)
 
 # ===== SYSTEMD TIMERS (modern alternative) =====
-systemctl list-timers                   # show active timers
-systemd-run --on-active=10m mycommand   # run once, 10 min from now
+systemctl list-timers                 # show active timers
+systemd-run --on-active=10m mycommand # run once, 10 min from now
 systemd-run --on-calendar="20:00" /usr/bin/touch /tmp/test # run at 20:00
 # timer units use OnCalendar= for schedules (like cron)
 
@@ -380,7 +380,7 @@ systemctl --user list-timers # --user: show your own timers
 
 # Once you have created the new timer, you can enable it and start it by running the following commands as root:
 systemctl enable foobar.timer # start the timer at boot
-systemctl start foobar.timer # start the timer now
+systemctl start foobar.timer  # start the timer now
 ```
 
 ## 107.3 Localisation and internationalisation
@@ -390,35 +390,35 @@ systemctl start foobar.timer # start the timer now
 # timezone = your time difference from a reference (UTC)
 # servers/cloud often use UTC to avoid confusion
 
-date                  # show current date/time
-cal                   # show calendar
-timedatectl           # show time, timezone, UTC, sync status (systemd)
+date        # show current date/time
+cal         # show calendar
+timedatectl # show time, timezone, UTC, sync status (systemd)
 
 # tzselect - interactive, asks location, OUTPUTS the TZ name (doesn't set it)
 tzselect
 
 # TZ variable - set YOUR OWN timezone (not the system's)
-TZ='America/New_York'; export TZ    # put in ~/.profile for a personal timezone
+TZ='America/New_York'; export TZ # put in ~/.profile for a personal timezone
 
 # CONFIGURING SYSTEM TIMEZONE
 # /etc/localtime  - the file Linux reads for system time
 #                   symlink OR copy of a zoneinfo file
-ln -s /usr/share/zoneinfo/America/New_York /etc/localtime   # link method (-s = symbolic)
-cp /usr/share/zoneinfo/America/New_York /etc/localtime      # copy method
+ln -s /usr/share/zoneinfo/America/New_York /etc/localtime # link method (-s = symbolic)
+cp /usr/share/zoneinfo/America/New_York /etc/localtime    # copy method
 
 # /etc/timezone   - holds timezone NAME (Debian based)
 # /etc/sysconfig/clock - same, on RHEL based
 # /usr/share/zoneinfo/ - database of all timezone files
 
-timedatectl set-timezone Europe/Amsterdam   # systemd way
-dpkg-reconfigure tzdata                     # Debian interactive menu
+timedatectl set-timezone Europe/Amsterdam # systemd way
+dpkg-reconfigure tzdata                   # Debian interactive menu
 
 # ===== LANGUAGES / LOCALE =====
 # environment variables tell the system which language/format to use
 # LANG=en_US.UTF-8  = English, US variant, UTF-8 encoding
 
-locale              # show current locale settings
-locale -a           # -a (all): list installed locales
+locale    # show current locale settings
+locale -a # -a (all): list installed locales
 
 dpkg-reconfigure locales # Debian interactive menu for locales
 
@@ -446,7 +446,7 @@ localectl # systemd: show/set locale and keyboard layout
 # UTF-8      Unicode, all languages (modern default)
 # Unicode    the standard; UTF-8 is an encoding of it
 
-iconv -f ISO-8859-1 -t UTF-8 file.txt   # convert encoding (-f from, -t to)
+iconv -f ISO-8859-1 -t UTF-8 file.txt # convert encoding (-f from, -t to)
 
 
 iconv -f UTF-8 -t ASCII//TRANSLIT test.txt > ascii.txt # TRANSLIT: replace special letters (é -> e)
@@ -462,21 +462,21 @@ iconv -f UTF-8 -t ASCII//TRANSLIT test.txt > ascii.txt # TRANSLIT: replace speci
 #   --systohc : system -> hardware      --hctosys : hardware -> system
 
 # ===== DISPLAY =====
-date                    # local time
-date -u                 # -u (UTC): Coordinated Universal Time
-date +%s                # Unix time (seconds since 1970 epoch, overflows 2038 on 32-bit)
-sudo hwclock            # hardware clock (needs root)
-timedatectl             # local + UTC + RTC + timezone + NTP (Network Time Protocol) sync status
+date         # local time
+date -u      # -u (UTC): Coordinated Universal Time
+date +%s     # Unix time (seconds since 1970 epoch, overflows 2038 on 32-bit)
+sudo hwclock # hardware clock (needs root)
+timedatectl  # local + UTC + RTC + timezone + NTP (Network Time Protocol) sync status
 
 # ===== SET (systemd way) =====
-timedatectl set-time '2011-11-25 14:00:00'   # date+time (or HH:MM:SS)
-timedatectl set-timezone Africa/Cairo        # exact name, case matters
-timedatectl list-timezones                   # grep this, it is long
-timedatectl set-ntp true                     # network sync on/off
+timedatectl set-time '2011-11-25 14:00:00' # date+time (or HH:MM:SS)
+timedatectl set-timezone Africa/Cairo      # exact name, case matters
+timedatectl list-timezones                 # grep this, it is long
+timedatectl set-ntp true                   # network sync on/off
 
 # ===== SET (legacy) =====
-date -s "11 Nov 2011 11:11:11"   ; hwclock --systohc   # -s (set) system, push to hardware
-hwclock --set --date "4/12/2019 11:15:19" ; hwclock --hctosys   # set hardware, pull to system
+date -s "11 Nov 2011 11:11:11"   ; hwclock --systohc          # -s (set) system, push to hardware
+hwclock --set --date "4/12/2019 11:15:19" ; hwclock --hctosys # set hardware, pull to system
 
 # ===== TIMEZONE FILES =====
 # /usr/share/zoneinfo/   all zone files
@@ -497,8 +497,8 @@ ln -s /usr/share/zoneinfo/Canada/Eastern /etc/localtime # -s (symbolic): link lo
 #   -> this is normal. check "System clock synchronized: yes" instead.
 
 # --- timesyncd (systemd built-in) ---
-timedatectl set-ntp true               # turn timesyncd sync on/off
-systemctl status systemd-timesyncd     # is it running?
+timedatectl set-ntp true           # turn timesyncd sync on/off
+systemctl status systemd-timesyncd # is it running?
 
 # --- ntpd (NTP daemon, full server, can also serve time) ---
 # NOTE: on Debian/Ubuntu the package + service are named "ntp", the program is "ntpd"
@@ -506,15 +506,15 @@ systemctl enable ntpd && systemctl start ntpd # start at boot, and start now
 # /etc/ntp.conf :  server 0.centos.pool.ntp.org iburst   (iburst = faster first sync)
 # pool.ntp.org = free volunteer server pool, DNS (Domain Name System) gives a random one (spreads load)
 # NTP is UDP (User Datagram Protocol) port 123  (PDF wrongly says TCP)
-ntpdate pool.ntp.org    # one-time manual sync (stop ntpd first; used when offset >17min)
-ntpq -p                 # ntpq (NTP query) -p (peers): show servers; * = server in use, -n (numeric) = show IPs
+ntpdate pool.ntp.org                          # one-time manual sync (stop ntpd first; used when offset >17min)
+ntpq -p                                       # ntpq (NTP query) -p (peers): show servers; * = server in use, -n (numeric) = show IPs
 
 # --- chrony (modern alternative) ---
 # chronyd = daemon,  chronyc = client (c = command line)
 # config: /etc/chrony.conf (RHEL, PDF) | /etc/chrony/chrony.conf (Debian/Ubuntu). "!" = disabled line
-chronyc tracking        # how well synced (offset, stratum, drift)
-chronyc sources         # which servers it uses
-chronyc makestep        # force an immediate step
+chronyc tracking # how well synced (offset, stratum, drift)
+chronyc sources  # which servers it uses
+chronyc makestep # force an immediate step
 ```
 
 ## 108.2 System logging
@@ -570,11 +570,11 @@ chronyc makestep        # force an immediate step
 #   /var/log/lastlog -> lastlog              (last login per user)
 
 # ===== READING LOGS =====
-less /var/log/auth.log        # page through
-zless /var/log/auth.log.3.gz  # same but for gzip-compressed rotated logs (also zmore)
-tail -f /var/log/syslog       # -f (follow): show new lines live
-head -5 /var/log/mail.log     # -5: first 5 lines
-grep "sshd" /var/log/syslog   # filter
+less /var/log/auth.log       # page through
+zless /var/log/auth.log.3.gz # same but for gzip-compressed rotated logs (also zmore)
+tail -f /var/log/syslog      # -f (follow): show new lines live
+head -5 /var/log/mail.log    # -5: first 5 lines
+grep "sshd" /var/log/syslog  # filter
 
 # log line format:  timestamp  hostname  program[PID]:  message   (PID = Process ID)
 
@@ -597,19 +597,19 @@ grep "sshd" /var/log/syslog   # filter
 # a priority matches that level AND higher (mail.err = err + crit + alert + emerg)
 
 # RULE format:  <facility>.<priority>   <action = where to send it>
-auth,authpriv.*         /var/log/auth.log     # all priorities (*) from auth -> auth.log
-*.*;auth,authpriv.none  -/var/log/syslog      # everything EXCEPT auth (.none). - = less disk writes
-mail.err                /var/log/mail.err     # mail, err or worse
+auth,authpriv.*         /var/log/auth.log # all priorities (*) from auth -> auth.log
+*.*;auth,authpriv.none  -/var/log/syslog  # everything EXCEPT auth (.none). - = less disk writes
+mail.err                /var/log/mail.err # mail, err or worse
 #  ; splits selectors   , joins facilities   .none excludes   .=debug means that ONE priority only
 
 # ===== logger (write your own log line, for scripts/testing) =====
 logger "this goes into /var/log/syslog"
 logger -t backup "done" # -t (tag): a name you can grep later
-tail -1 /var/log/syslog       # -1: last line. see it
+tail -1 /var/log/syslog # -1: last line. see it
 
 # ===== dmesg (kernel ring buffer) =====
 # kernel logs to an in-memory ring buffer at boot, before rsyslog is ready
-dmesg | grep usb              # print kernel messages
+dmesg | grep usb # print kernel messages
 
 # ===== logrotate (stop logs growing forever) =====
 # renames, compresses, and finally deletes old logs. run daily by /etc/cron.daily/logrotate
@@ -634,28 +634,28 @@ dmesg | grep usb              # print kernel messages
 # binary = cannot use less/cat, must use journalctl
 
 # ===== journalctl (read the journal, needs root/sudo) =====
-journalctl                    # whole journal, oldest first
-journalctl -r                 # -r (reverse): newest first
-journalctl -f                 # -f (follow): live (like tail -f)
-journalctl -e                 # -e (end): jump to end
-journalctl -n 5               # -n (number): last 5 lines
-journalctl -k                 # -k (kernel): kernel messages only (= dmesg), also --dmesg
-journalctl -b                 # -b (boot): this boot   (-b -1 = previous boot, needs persistent storage)
-journalctl -b -0 -p err       # -p (priority): err or worse, for current boot
-journalctl --since "19:00:00" --until "19:01:00"   # time range (YYYY-MM-DD HH:MM:SS)
-journalctl --since "2 minutes ago"                 # also: yesterday, today, now
-journalctl -u ssh.service     # -u (unit): by systemd unit
-journalctl /usr/sbin/sshd     # by program path
+journalctl                                       # whole journal, oldest first
+journalctl -r                                    # -r (reverse): newest first
+journalctl -f                                    # -f (follow): live (like tail -f)
+journalctl -e                                    # -e (end): jump to end
+journalctl -n 5                                  # -n (number): last 5 lines
+journalctl -k                                    # -k (kernel): kernel messages only (= dmesg), also --dmesg
+journalctl -b                                    # -b (boot): this boot   (-b -1 = previous boot, needs persistent storage)
+journalctl -b -0 -p err                          # -p (priority): err or worse, for current boot
+journalctl --since "19:00:00" --until "19:01:00" # time range (YYYY-MM-DD HH:MM:SS)
+journalctl --since "2 minutes ago"               # also: yesterday, today, now
+journalctl -u ssh.service                        # -u (unit): by systemd unit
+journalctl /usr/sbin/sshd                        # by program path
 # by field:  journalctl PRIORITY=3   SYSLOG_FACILITY=1   _PID=1
 #   two fields together = AND    |    field + field = OR
 
 # ===== systemd-cat (send command output INTO the journal) =====
 # like logger, but for the journal. sends stdin, stdout, stderr to journald.
-systemd-cat                                # no args: reads stdin, type lines, Ctrl+C to stop
-echo "hello" | systemd-cat                 # send a piped command's output to the journal
-systemd-cat echo "hello too"               # run a command, send its output (and stderr) to journal
-systemd-cat -p emerg echo "not real"       # -p (priority): set a priority level
-journalctl -n 4                            # see the last lines you added
+systemd-cat                          # no args: reads stdin, type lines, Ctrl+C to stop
+echo "hello" | systemd-cat           # send a piped command's output to the journal
+systemd-cat echo "hello too"         # run a command, send its output (and stderr) to journal
+systemd-cat -p emerg echo "not real" # -p (priority): set a priority level
+journalctl -n 4                      # see the last lines you added
 
 # ===== STORAGE: persistent vs volatile =====
 # /var/log/journal/   exists -> logs saved on DISK (survive reboot)
@@ -668,13 +668,13 @@ journalctl -n 4                            # see the last lines you added
 # turn on persistent:  set Storage=persistent (or mkdir /var/log/journal), then restart: sudo systemctl restart systemd-journald
 
 # ===== SIZE / DELETE OLD DATA =====
-journalctl --disk-usage       # how much space the journal uses
+journalctl --disk-usage          # how much space the journal uses
 # limits in journald.conf:  SystemMaxUse=500M  (max space, default 10% of filesystem, cap 4GiB)
 #                           SystemKeepFree= , SystemMaxFileSize= , SystemMaxFiles= (default 100)
 # manual clean (vacuum), only touches ARCHIVED files:
-journalctl --vacuum-time=1months    # delete older than 1 month
-journalctl --vacuum-size=100M       # keep only 100M
-journalctl --vacuum-files=10        # keep only 10 files
+journalctl --vacuum-time=1months # delete older than 1 month
+journalctl --vacuum-size=100M    # keep only 100M
+journalctl --vacuum-files=10     # keep only 10 files
 
 # ===== rsyslog <-> journald =====
 # in journald.conf:  ForwardToSyslog=yes   -> journald also sends logs to rsyslog
@@ -707,25 +707,25 @@ journalctl -D /mnt/broken/var/log/journal/
 # every MTA copies sendmail's commands -> sendmail, mailq, newaliases work on ANY MTA
 
 # ===== /etc/aliases (root) =====
-postmaster:  root             # <alias>: <destination>
-www:         webmaster        # aliases can chain
-test:        /dev/null        # throw away
-support:     ali, sara        # several destinations
-newaliases                    # MUST run after editing (= sendmail -bi / -I)
+postmaster:  root      # <alias>: <destination>
+www:         webmaster # aliases can chain
+test:        /dev/null # throw away
+support:     ali, sara # several destinations
+newaliases             # MUST run after editing (= sendmail -bi / -I)
 
 # ===== mail =====
-mail user                     # send: Subject, body, Ctrl+D to end
-mail                          # read inbox: p print, d delete, r reply, q quit
-echo "body" | mail -s "subj" user@host     # -s (subject)
-mail -a file.gz user@host                  # -a (attach)
+mail user                              # send: Subject, body, Ctrl+D to end
+mail                                   # read inbox: p print, d delete, r reply, q quit
+echo "body" | mail -s "subj" user@host # -s (subject)
+mail -a file.gz user@host              # -a (attach)
 
 # ===== ~/.forward (normal user) =====
 # user forwards OWN mail: put a user or email address inside
 # NO newaliases needed | owner-writable only | hidden file
 
 # ===== queue =====
-mailq                         # show stuck mail + reason (= sendmail -bp)
-sendmail -q                   # -q (queue): retry now
+mailq       # show stuck mail + reason (= sendmail -bp)
+sendmail -q # -q (queue): retry now
 
 # ===== PDF extras =====
 # SMTP = TCP port 25
@@ -742,8 +742,8 @@ sendmail -q                   # -q (queue): retry now
 # CUPS (Common Unix Printing System) = the printing system on most distros. daemon: cupsd
 
 # ===== INSTALL / START =====
-sudo apt install cups                 # (dnf install cups on RHEL)
-sudo systemctl start cups.service     # start CUPS now
+sudo apt install cups             # (dnf install cups on RHEL)
+sudo systemctl start cups.service # start CUPS now
 
 # ===== CONFIG FILES (/etc/cups/) =====
 # /etc/cups/cupsd.conf      main config.  Listen localhost:631 = listen on port 631
@@ -761,21 +761,21 @@ sudo systemctl start cups.service     # start CUPS now
 # ===== LPD LEGACY INTERFACE (may need package: cups-bsd) =====
 # LPD (Line Printer Daemon) = old BSD printing system, before CUPS.
 # CUPS still accepts its commands, so old scripts keep working. CUPS does the real work.
-lpr -PMyPrinter file.txt       # -P (printer): print. no printer = default printer
-lpq                            # show queue (q = queue). -a (all) printers | -PMyPrinter one printer
-lprm 2                         # remove job ID 2 (rm = remove). only root removes others' jobs
-lprm -                         # remove ALL your jobs
-lpc status                     # printer status (c = control)
+lpr -PMyPrinter file.txt # -P (printer): print. no printer = default printer
+lpq                      # show queue (q = queue). -a (all) printers | -PMyPrinter one printer
+lprm 2                   # remove job ID 2 (rm = remove). only root removes others' jobs
+lprm -                   # remove ALL your jobs
+lpc status               # printer status (c = control)
 #   NOTE: no space after -P  ->  -PMyPrinter
 #   lpc status output:
 #     queuing is enabled   -> queue ACCEPTS new jobs
 #     printing is enabled  -> printer really PRINTS on paper
 
 # ===== CONTROL QUEUE / PRINTING =====
-cupsaccept  MyPrinter          # queue accepts new jobs
-cupsreject  MyPrinter          # queue refuses new jobs
-cupsenable  MyPrinter          # physical printing ON
-cupsdisable MyPrinter -r "need more paper"   # printing OFF. -r (reason)
+cupsaccept  MyPrinter                      # queue accepts new jobs
+cupsreject  MyPrinter                      # queue refuses new jobs
+cupsenable  MyPrinter                      # physical printing ON
+cupsdisable MyPrinter -r "need more paper" # printing OFF. -r (reason)
 ```
 
 ## 109.1 Fundamentals of internet protocols
@@ -812,7 +812,7 @@ cupsdisable MyPrinter -r "need more paper"   # printing OFF. -r (reason)
 #   network   = IP AND mask
 #   broadcast = network OR flipped mask
 # 192.168.4.12/24 -> network 192.168.4.0 | broadcast 192.168.4.255
-ipcalc 192.168.4.12/24         # calculates it for you
+ipcalc 192.168.4.12/24 # calculates it for you
 
 # BINARY:  128 64 32 16 8 4 2 1   ->  11000000 = 128+64 = 192
 # ===== PROTOCOLS =====
@@ -832,8 +832,8 @@ ipcalc 192.168.4.12/24         # calculates it for you
 
 # ===== /etc/services =====
 # text file: maps service names to port numbers + protocol
-grep -w 22 /etc/services      # -w (word): exact word only. ssh   22/tcp
-grep -w ssh /etc/services     # find the port of a service
+grep -w 22 /etc/services  # -w (word): exact word only. ssh   22/tcp
+grep -w ssh /etc/services # find the port of a service
 
 # ===== IPv6 =====
 # 128 bits, 8 hex groups:  2001:0db8:0000:0000:0000:0000:0000:7344
@@ -860,16 +860,16 @@ grep -w ssh /etc/services     # find the port of a service
 # NIC (Network Interface Card) = the network hardware
 # old names: eth0, eth1, wlan0      new names: eno1, ens1, enp3s5, wlp3s0
 # lo = loopback, always there, = 127.0.0.1
-ip link show                   # list interfaces
+ip link show # list interfaces
 
 # ===== ifconfig (LEGACY, deprecated) =====
-ifconfig                       # show active interfaces   (-a (all) = even down)
-ifconfig eth0 192.168.42.42 netmask 255.255.255.0   # set IP (root)
-ifconfig eth0 down             # turn off  (up = on)
+ifconfig           # show active interfaces   (-a (all) = even down)
+ifconfig eth0 192.168.42.42 netmask 255.255.255.0 # set IP (root)
+ifconfig eth0 down # turn off  (up = on)
 
 # ===== ifup / ifdown (use saved config) =====
-ifup eth0                      # bring interface up using its config file
-ifdown eth0                    # bring it down
+ifup eth0   # bring interface up using its config file
+ifdown eth0 # bring it down
 # config files:
 #   Debian: /etc/network/interfaces        (all interfaces in ONE file)
 #   RHEL:   /etc/sysconfig/network-scripts/ifcfg-eth0   (+ gateway in /etc/sysconfig/network)
@@ -882,21 +882,21 @@ ifdown eth0                    # bring it down
 # gateway 192.168.1.1
 
 # ===== ip (modern, TEMPORARY changes) =====
-ip addr add 172.19.1.10/24 dev eth2      # add IP (dev = device: which card)
-ip addr show eth2                        # show IPs of eth2
-ip addr del 172.19.1.10/24 dev eth2      # delete IP
-ip link set eth2 up                      # turn on
-ip route show                            # show routing table
-ip route add default via 192.168.1.1     # add default gateway (via = through this gateway)
+ip addr add 172.19.1.10/24 dev eth2  # add IP (dev = device: which card)
+ip addr show eth2                    # show IPs of eth2
+ip addr del 172.19.1.10/24 dev eth2  # delete IP
+ip link set eth2 up                  # turn on
+ip route show                        # show routing table
+ip route add default via 192.168.1.1 # add default gateway (via = through this gateway)
 
 # ===== NetworkManager + nmcli =====
 # NetworkManager = daemon that manages networks (auto wifi, DHCP)
 # it manages interfaces NOT listed in /etc/network/interfaces
 # DHCP (Dynamic Host Configuration Protocol) = get IP, mask, gateway, DNS automatically
 # frontends: GUI applet | nmtui (text menu) | nmcli (command line)
-nmcli general                  # overall status
-nmcli device                   # list devices
-nmcli device wifi              # list wifi networks (= wifi list)
+nmcli general                                    # overall status
+nmcli device                                     # list devices
+nmcli device wifi                                # list wifi networks (= wifi list)
 nmcli device wifi connect MyWifi password MyPass # connect to a wifi network
 
 # ===== HOSTNAME =====
@@ -912,18 +912,18 @@ hostnamectl                                     # show status
 # local list: IP -> name (checked before DNS by default)
 127.0.0.1      localhost
 ::1            localhost
-192.168.1.10   foo.mydomain.org  foo      # extra names = aliases
+192.168.1.10   foo.mydomain.org  foo # extra names = aliases
 
 # ===== /etc/resolv.conf (DNS) =====
-nameserver 192.168.1.1         # DNS server. up to 3
-nameserver 4.2.2.4             # fallback
-domain jadi.net                # local domain -> short names work
-search jadi.net company.com    # domains to try for short names
+nameserver 192.168.1.1      # DNS server. up to 3
+nameserver 4.2.2.4          # fallback
+domain jadi.net             # local domain -> short names work
+search jadi.net company.com # domains to try for short names
 # NOTE: Jadi's page writes "resolve.conf". Correct name is resolv.conf (no e)
 
 # ===== /etc/nsswitch.conf =====
 # says WHERE and in WHICH ORDER to look up names, users, groups
-hosts: files dns               # first /etc/hosts, then DNS
+hosts: files dns # first /etc/hosts, then DNS
 # hosts: dns files             # DNS first, /etc/hosts only if DNS does not know
 
 # ============================================================
@@ -967,40 +967,40 @@ nmcli radio wifi off                     # turn wifi off  (on = back)
 #   5. where does it break?       traceroute
 
 # ===== ifconfig & ip (check IP) =====
-ip addr show                   # needs correct IP + netmask
-ifconfig                       # legacy
-man ip-address                 # help for one ip subcommand
+ip addr show   # needs correct IP + netmask
+ifconfig       # legacy
+man ip-address # help for one ip subcommand
 
 # ===== ping & ping6 =====
-ping 192.168.70.1              # gateway: should always answer (unless ICMP blocked)
-ping 4.2.2.4                   # Internet by IP
-ping google.com                # "unknown host" = DNS problem -> check /etc/resolv.conf
-ping -c 3 192.168.50.2         # -c (count): send 3 then stop (else Ctrl+C)
-ping6 -c 3 2001:db8::10        # IPv6
+ping 192.168.70.1       # gateway: should always answer (unless ICMP blocked)
+ping 4.2.2.4            # Internet by IP
+ping google.com         # "unknown host" = DNS problem -> check /etc/resolv.conf
+ping -c 3 192.168.50.2  # -c (count): send 3 then stop (else Ctrl+C)
+ping6 -c 3 2001:db8::10 # IPv6
 
 # ===== ROUTING (temporary, lost at reboot) =====
 # "Network is unreachable" + gateway pings OK = default gateway MISSING
-ip route show                  # "default via 192.168.70.1" = default gateway
-sudo ip route del default      # delete the default gateway
+ip route show                              # "default via 192.168.70.1" = default gateway
+sudo ip route del default                  # delete the default gateway
 sudo ip route add default via 192.168.70.1 # add it back (via = through this gateway)
-netstat -nr                    # routing table, legacy (-n numeric, -r routes)
+netstat -nr                                # routing table, legacy (-n numeric, -r routes)
 
 # ===== traceroute & tracepath =====
-traceroute 4.2.2.4             # each router (hop) on the way. * * * = hop blocks ICMP
-tracepath 4.2.2.4             # same idea (for LPIC-1 "essentially the same")
+traceroute 4.2.2.4 # each router (hop) on the way. * * * = hop blocks ICMP
+tracepath 4.2.2.4  # same idea (for LPIC-1 "essentially the same")
 
 # ===== ss & netstat (ports and connections) =====
 # ss = new, netstat = legacy. same options mostly
-ss -na | grep LISTEN           # -n numeric, -a all
-ss -tulpn                      # t tcp | u udp | l listening | p process | n numeric
-netstat -tulpn                 # same, legacy
+ss -na | grep LISTEN # -n numeric, -a all
+ss -tulpn            # t tcp | u udp | l listening | p process | n numeric
+netstat -tulpn       # same, legacy
 
 # ===== netcat (nc) =====
-nc -l 1337                     # -l (listen): listen on port 1337
-nc localhost 1337              # connect, type text -> shows on the listener
+nc -l 1337        # -l (listen): listen on port 1337
+nc localhost 1337 # connect, type text -> shows on the listener
 
 # ===== dig =====
-dig google.com                 # SERVER: line shows which DNS answered
+dig google.com # SERVER: line shows which DNS answered
 
 # ============================================================
 # EXTRAS
@@ -1029,20 +1029,20 @@ nameserver 4.2.2.4
 # often "# Generated by NetworkManager" -> hand edits get OVERWRITTEN (temporary)
 
 # ===== host (simple lookup) =====
-host kernel.org                 # A (IPv4), AAAA (IPv6), MX (mail) records
-host -t A kernel.org            # -t (type): only one record type
-host 208.80.154.224             # IP -> name (reverse lookup, PTR record)
+host kernel.org      # A (IPv4), AAAA (IPv6), MX (mail) records
+host -t A kernel.org # -t (type): only one record type
+host 208.80.154.224  # IP -> name (reverse lookup, PTR record)
 
 # ===== dig (detailed lookup, for troubleshooting) =====
-dig x.org                       # ANSWER section: x.org. 1625 IN A 131.252.210.176
+dig x.org               # ANSWER section: x.org. 1625 IN A 131.252.210.176
 #   1625 = TTL: seconds this answer stays in cache
 #   SERVER: 192.168.1.1#53 = which DNS answered (port 53)
-dig @8.8.8.8 google.com         # @ = ask THIS DNS server, not the one in resolv.conf
-dig -t MX lpi.org               # -t (type): record type
+dig @8.8.8.8 google.com # @ = ask THIS DNS server, not the one in resolv.conf
+dig -t MX lpi.org       # -t (type): record type
 
 # ===== /etc/hosts (static, local names) =====
-192.168.59.231  mass1           # works even if DNS does not know "mass1"
-127.0.0.1       facebook.com    # block a site: name points to your own machine
+192.168.59.231  mass1        # works even if DNS does not know "mass1"
+127.0.0.1       facebook.com # block a site: name points to your own machine
 # dig ignores /etc/hosts (asks DNS only) -> dig mass1 fails, ping mass1 works
 
 # ===== /etc/nsswitch.conf (lookup ORDER) =====
@@ -1051,8 +1051,8 @@ hosts: files mdns4_minimal [NOTFOUND=return] dns
 #   [NOTFOUND=return] = stop here if the service answered "not found"
 
 # ===== getent (lookup like a real program, follows nsswitch) =====
-getent hosts                    # all hosts entries
-getent hosts dns1.lpi.org       # one name
+getent hosts              # all hosts entries
+getent hosts dns1.lpi.org # one name
 
 # ===== systemd-resolved (awareness) =====
 # systemd's local DNS service, listens on 127.0.0.53
@@ -1064,7 +1064,7 @@ getent hosts dns1.lpi.org       # one name
 # resolv.conf limits:
 #   max 3 nameserver | max 6 search domains
 #   domain and search: use ONE. if both, the LAST one wins
-options timeout:3               # seconds to wait for a DNS answer
+options timeout:3 # seconds to wait for a DNS answer
 
 # nsswitch actions:
 #   [NOTFOUND=return]   service answered "not found" -> stop
@@ -1073,12 +1073,12 @@ options timeout:3               # seconds to wait for a DNS answer
 
 # record types (use with -t):
 #   A = IPv4 | AAAA = IPv6 | MX = mail | NS = name servers | SOA = zone info | PTR = IP -> name
-host -t MX lpi.org dns1.easydns.com   # last argument = which DNS server to ask
-dig +short lpi.org              # +short: only the IP, no extra text
+host -t MX lpi.org dns1.easydns.com # last argument = which DNS server to ask
+dig +short lpi.org                  # +short: only the IP, no extra text
 # ~/.digrc = your default dig options
 
-getent -s files hosts learning.lpi.org   # -s (source): force one source (files or dns)
-getent group openldap                    # works for users/groups too, not just hosts
+getent -s files hosts learning.lpi.org # -s (source): force one source (files or dns)
+getent group openldap                  # works for users/groups too, not just hosts
 
 # KEY DIFFERENCE:
 #   getent, ping, ssh, curl -> follow nsswitch (files, dns, ...) = what programs really see
@@ -1091,52 +1091,52 @@ getent group openldap                    # works for users/groups too, not just 
 # 110.1 - PERFORM SECURITY ADMINISTRATION TASKS (weight 3)
 
 # ===== su vs sudo =====
-su -                   # become root. asks ROOT's password. "-" = load target's environment
-su - carol             # become carol. asks CAROL's password
-su                     # no "-" -> keeps your old environment (stays in /home/you)
-sudo ls                # run ONE command as root. asks YOUR password
-sudo su -              # become root using your own password
+su -       # become root. asks ROOT's password. "-" = load target's environment
+su - carol # become carol. asks CAROL's password
+su         # no "-" -> keeps your old environment (stays in /home/you)
+sudo ls    # run ONE command as root. asks YOUR password
+sudo su -  # become root using your own password
 # sudo is safer: no root password shared, only single commands
 
 sudo -u carol ping 8.8.8.8 # -u (user): run as carol
 
 # ===== /etc/sudoers (edit ONLY with visudo) =====
-root    ALL=(ALL:ALL) ALL       # user  host=(as_user:as_group)  commands
-%sudo   ALL=(ALL:ALL) ALL       # %  = a group
+root    ALL=(ALL:ALL) ALL   # user  host=(as_user:as_group)  commands
+%sudo   ALL=(ALL:ALL) ALL   # %  = a group
 %admin  ALL=(ALL) ALL
-jadi    ALL=(ALL) /bin/ping     # jadi can run ONLY ping as root
-#includedir /etc/sudoers.d      # extra files, preferred place for your rules
-visudo                          # checks syntax before saving. a broken sudoers = no sudo
+jadi    ALL=(ALL) /bin/ping # jadi can run ONLY ping as root
+#includedir /etc/sudoers.d  # extra files, preferred place for your rules
+visudo                      # checks syntax before saving. a broken sudoers = no sudo
 
 # ===== WHO IS / WAS LOGGED IN =====
-w                       # logged in now + what they are doing (+ uptime, load)
-who                     # logged in now (user, tty, time, host)
-last                    # past logins, newest first. reads /var/log/wtmp
-last -f /var/log/btmp   # -f (file): FAILED logins (same as: lastb)
+w                     # logged in now + what they are doing (+ uptime, load)
+who                   # logged in now (user, tty, time, host)
+last                  # past logins, newest first. reads /var/log/wtmp
+last -f /var/log/btmp # -f (file): FAILED logins (same as: lastb)
 
 # ===== passwd =====
-passwd                  # change your own password
-sudo passwd jadi        # change another user's password
-passwd -S               # -S (Status): jadi P 2023-09-14 0 99999 7 -1
+passwd           # change your own password
+sudo passwd jadi # change another user's password
+passwd -S        # -S (Status): jadi P 2023-09-14 0 99999 7 -1
 #   P = has password | L = locked | NP = no password
-passwd -l jadi          # -l (lock)    (-u unlock, -e expire)
+passwd -l jadi   # -l (lock)    (-u unlock, -e expire)
 # shell, home... -> use usermod, not passwd
 
 # ===== chage (password aging) =====
-chage -l jadi           # -l (list): list aging info
-chage jadi              # interactive mode (root)
-chage -m 7 jadi         # -m (min): min days between changes  (-M = max days)
+chage -l jadi   # -l (list): list aging info
+chage jadi      # interactive mode (root)
+chage -m 7 jadi # -m (min): min days between changes  (-M = max days)
 
 # ===== SUID / SGID =====
 # SUID (s in user part) = runs as the file OWNER, not as the runner
-ls -l /usr/bin/passwd   # -l (long). -rwsr-xr-x root  -> passwd can edit /etc/shadow for normal users
+ls -l /usr/bin/passwd  # -l (long). -rwsr-xr-x root  -> passwd can edit /etc/shadow for normal users
 # danger: SUID on vi = anyone edits any file as root. audit regularly:
-sudo find / -perm -u+s  # -perm (permissions): all SUID files
+sudo find / -perm -u+s # -perm (permissions): all SUID files
 # SGID = same idea, runs with the file's GROUP
 
 # ===== LIMITS =====
-ulimit -a               # -a (all): show all limits
-ulimit -t 1             # -t (time): CPU time max 1 second. TEMPORARY (this shell only)
+ulimit -a   # -a (all): show all limits
+ulimit -t 1 # -t (time): CPU time max 1 second. TEMPORARY (this shell only)
 # permanent, system-wide: /etc/security/limits.conf
 #   <domain>   <type>  <item>     <value>
 #   @student   hard    nproc      20        # group student: max 20 processes
@@ -1145,38 +1145,38 @@ ulimit -t 1             # -t (time): CPU time max 1 second. TEMPORARY (this shel
 # soft = user can change it | hard = the real maximum
 
 # ===== OPEN PORTS =====
-netstat -tuna           # t tcp | u udp | n numeric | a all  ("tuna" sandwich)
+netstat -tuna        # t tcp | u udp | n numeric | a all  ("tuna" sandwich)
 #   LISTEN = server waiting | ESTABLISHED = active connection | 0.0.0.0 = any address
-ss -tuna                # modern
-lsof -i                 # -i (internet): open network connections + command, PID, user
-sudo fuser -v 22/tcp    # -v (verbose): which process uses port 22
+ss -tuna             # modern
+lsof -i              # -i (internet): open network connections + command, PID, user
+sudo fuser -v 22/tcp # -v (verbose): which process uses port 22
 
 # ===== nmap =====
-nmap localhost          # scan ports 1-1000, show open ones
+nmap localhost # scan ports 1-1000, show open ones
 
 # ============================================================
 # EXTRAS
 # ============================================================
 # find -perm, the 3 forms:
-find . -perm 4000       # ONLY SUID, exactly
-find /usr/bin -perm -4000    # SUID + any other perms   (= -perm -u+s)
-find /usr/bin -perm -2000    # SGID                      (= -perm -g+s)
-find /usr/bin -perm /6000    # SUID OR SGID              (4 + 2 = 6)
+find . -perm 4000         # ONLY SUID, exactly
+find /usr/bin -perm -4000 # SUID + any other perms   (= -perm -u+s)
+find /usr/bin -perm -2000 # SGID                      (= -perm -g+s)
+find /usr/bin -perm /6000 # SUID OR SGID              (4 + 2 = 6)
 
 # lock also with usermod
-usermod -L carol        # -L (Lock)   (-U Unlock)
-usermod -f 3 carol      # -f: disable account 3 days after password expires (= chage -I)
-usermod -e 2050-12-13 carol  # -e (expire): account expire date (= chage -E)
+usermod -L carol            # -L (Lock)   (-U Unlock)
+usermod -f 3 carol          # -f: disable account 3 days after password expires (= chage -I)
+usermod -e 2050-12-13 carol # -e (expire): account expire date (= chage -E)
 
 # chage options
 #   -m min | -M max | -d last change (0 = force change at login)
 #   -I inactive days | -E account expire date | -W warn days
 
 # lsof / fuser
-lsof -i@192.168.1.7     # -i (internet): connections to one host
-lsof -i :22             # one port
-fuser -vn tcp 80        # -v (verbose) -n (namespace) tcp: who uses tcp port 80
-fuser -k 80/tcp         # -k (kill): KILL the processes using it
+lsof -i@192.168.1.7 # -i (internet): connections to one host
+lsof -i :22         # one port
+fuser -vn tcp 80    # -v (verbose) -n (namespace) tcp: who uses tcp port 80
+fuser -k 80/tcp     # -k (kill): KILL the processes using it
 
 # nmap
 nmap -p 22 localhost    # -p (port): one port (= -p ssh)
@@ -1186,21 +1186,21 @@ nmap -F localhost       # -F (fast): top 100 ports
 nmap 192.168.1.0/24     # whole subnet (--exclude 192.168.1.7)
 
 # ulimit soft / hard
-ulimit -Ha              # -H (hard) + -a (all): all HARD limits (-a alone = soft)
-ulimit -Sf 200          # -S (soft) + -f (file size): set only soft file size
-ulimit -f 500           # no -S/-H = sets BOTH
+ulimit -Ha     # -H (hard) + -a (all): all HARD limits (-a alone = soft)
+ulimit -Sf 200 # -S (soft) + -f (file size): set only soft file size
+ulimit -f 500  # no -S/-H = sets BOTH
 # normal user: can LOWER hard, raise soft only up to hard
 
 # who / w / last
-who -b                  # -b (boot): last boot time  (-r runlevel, -H headings)
-last carol              # one user only
+who -b     # -b (boot): last boot time  (-r runlevel, -H headings)
+last carol # one user only
 
 # sudo
-sudo -u carol cmd       # -u (user): run as another user
-carol ALL=(ALL:ALL) NOPASSWD: /usr/bin/systemctl status apache2   # no password asked
+sudo -u carol cmd                       # -u (user): run as another user
+carol ALL=(ALL:ALL) NOPASSWD: /usr/bin/systemctl status apache2 # no password asked
 # sudo remembers your password 15 min. change: Defaults timestamp_timeout=1
 # aliases: Host_Alias | User_Alias | Cmnd_Alias | Runas_Alias
-User_Alias ADMINS = carol, %sudo, !john     # ! = exclude
+User_Alias ADMINS = carol, %sudo, !john # ! = exclude
 Cmnd_Alias SERVICES = /usr/bin/systemctl *
 ADMINS ALL = SERVICES
 ```
@@ -1221,7 +1221,7 @@ grep jadi /etc/shadow # Permission denied  -> needs sudo
 # ===== /etc/nologin (maintenance) =====
 # file exists -> nobody can log in, its text is shown to them. delete it -> logins work again
 # root CAN still log in
-sudo usermod -s /sbin/nologin baduser   # -s (shell): this user has no shell, but mail/ftp still work
+sudo usermod -s /sbin/nologin baduser # -s (shell): this user has no shell, but mail/ftp still work
 
 # ===== SUPER-SERVERS (inetd, xinetd) =====
 # one daemon listens for many services, starts the real service ONLY when a request comes
@@ -1230,41 +1230,41 @@ sudo usermod -s /sbin/nologin baduser   # -s (shell): this user has no shell, bu
 # /etc/xinetd.d/     one file per service
 service telnet
 {
-    disable      = no                     # no = ACTIVE, yes = off
-    socket_type  = stream                 # stream = TCP, dgram = UDP
-    wait         = no                     # no = handle many connections at once
+    disable      = no                   # no = ACTIVE, yes = off
+    socket_type  = stream               # stream = TCP, dgram = UDP
+    wait         = no                   # no = handle many connections at once
     user         = root
-    server       = /usr/sbin/in.telnetd   # full path of the real service
-    no_access    = 10.0.1.0/24            # blocked network
-    access_times = 09:45-16:15            # allowed hours
+    server       = /usr/sbin/in.telnetd # full path of the real service
+    no_access    = 10.0.1.0/24          # blocked network
+    access_times = 09:45-16:15          # allowed hours
 }
 
 # systemd .socket = modern xinetd: systemd waits on the port, starts the service on demand
-sudo systemctl stop ssh.service     # stop the always-running sshd
-sudo systemctl start ssh.socket     # systemd now watches port 22
-sudo lsof -i :22 -P                 # -P: show port numbers. listener = systemd, not sshd
+sudo systemctl stop ssh.service # stop the always-running sshd
+sudo systemctl start ssh.socket # systemd now watches port 22
+sudo lsof -i :22 -P             # -P: show port numbers. listener = systemd, not sshd
 
 # ===== TCP WRAPPERS: /etc/hosts.allow & /etc/hosts.deny =====
 # work only for programs linked with libwrap:
 ldd /usr/sbin/vsftpd | grep libwrap # ldd = list the libraries a program uses
 # format:  service: hosts
-vsftpd: 10.10.100.         # in hosts.allow -> only 10.10.100.* may use vsftpd
-sshd: ALL                  # in hosts.deny  -> block everyone
-sshd: LOCAL                # in hosts.allow -> except local network
+vsftpd: 10.10.100.                  # in hosts.allow -> only 10.10.100.* may use vsftpd
+sshd: ALL                           # in hosts.deny  -> block everyone
+sshd: LOCAL                         # in hosts.allow -> except local network
 # ALL = all services or all hosts
 
 # ===== REMOVE UNUSED SERVICES =====
-sudo service --status-all            # SysV list: [+] running, [-] stopped
-sudo chkconfig vsftpd off            # RedHat, old
-sudo update-rc.d vsftpd remove       # Debian, old
+sudo service --status-all                   # SysV list: [+] running, [-] stopped
+sudo chkconfig vsftpd off                   # RedHat, old
+sudo update-rc.d vsftpd remove              # Debian, old
 systemctl list-units --state active --type service # list running services
-sudo systemctl disable vsftpd.service --now    # systemd: stop now + off at boot
-ss -ltu    /  netstat -ltu           # -l listening -t tcp -u udp: listening services (PDF)
+sudo systemctl disable vsftpd.service --now # systemd: stop now + off at boot
+ss -ltu    /  netstat -ltu                  # -l listening -t tcp -u udp: listening services (PDF)
 
 # ===== /etc/inittab (SysV, old) =====
 # format:  id:runlevel:action:process
-1:2345:respawn:/sbin/mingetty tty1   # runlevels 2-5: start getty, restart if killed
-id:3:initdefault:                    # boot into runlevel 3
+1:2345:respawn:/sbin/mingetty tty1 # runlevels 2-5: start getty, restart if killed
+id:3:initdefault:                  # boot into runlevel 3
 # /etc/init.d/  = old init scripts
 ```
 
@@ -1281,24 +1281,24 @@ id:3:initdefault:                    # boot into runlevel 3
 #   sign:    you use YOUR private key   -> anyone checks it with your public key
 
 # ===== SSH HOST KEYS (server identity) =====
-ssh 192.168.70.2        # 1st time: "authenticity can't be established" + fingerprint -> yes
+ssh 192.168.70.2           # 1st time: "authenticity can't be established" + fingerprint -> yes
 # saved in ~/.ssh/known_hosts (per user) | /etc/ssh/ssh_known_hosts (system-wide)
 # key changed -> "REMOTE HOST IDENTIFICATION HAS CHANGED!" (maybe man-in-the-middle)
-ssh-keygen -R 192.168.70.2   # -R (remove): remove old key from known_hosts (after checking it's safe)
+ssh-keygen -R 192.168.70.2 # -R (remove): remove old key from known_hosts (after checking it's safe)
 # server keys: /etc/ssh/ssh_host_{rsa,dsa,ecdsa,ed25519}_key (+ .pub)
 
 # ===== YOUR OWN KEYS =====
-ssh-keygen              # default: rsa -> ~/.ssh/id_rsa + id_rsa.pub
-ssh-keygen -t ecdsa     # -t (type): rsa | dsa | ecdsa | ed25519 -> ~/.ssh/id_ecdsa(.pub)
+ssh-keygen          # default: rsa -> ~/.ssh/id_rsa + id_rsa.pub
+ssh-keygen -t ecdsa # -t (type): rsa | dsa | ecdsa | ed25519 -> ~/.ssh/id_ecdsa(.pub)
 # passphrase = password on the private key (asked on every use)
 
 # ===== KEY-BASED LOGIN (no password) =====
-ssh-copy-id 192.168.70.2     # copies your PUBLIC key into server's ~/.ssh/authorized_keys
+ssh-copy-id 192.168.70.2 # copies your PUBLIC key into server's ~/.ssh/authorized_keys
 # server needs in /etc/ssh/sshd_config:  PubkeyAuthentication yes
 
 # ===== ssh-agent / ssh-add =====
-ssh-agent /bin/bash     # start a shell with the agent
-ssh-add                 # load your keys -> passphrase asked ONCE, then remembered
+ssh-agent /bin/bash # start a shell with the agent
+ssh-add             # load your keys -> passphrase asked ONCE, then remembered
 
 # ===== SSH TUNNELS =====
 ssh -L 5433:localhost:5432 admin@ec2
@@ -1313,8 +1313,8 @@ ssh -R 0.0.0.0:8000:localhost:3000 admin@ec2
 #   same, but port 8000 opens on ALL ec2 interfaces (reachable from internet)
 #   needs GatewayPorts in the server's sshd_config (default: localhost only)
 
-ssh -D 1080 192.168.70.2     # -D (dynamic): localhost:1080 becomes a SOCKS proxy
-ssh -X 192.168.70.2          # -X: X11 forwarding: remote GUI apps show on my screen
+ssh -D 1080 192.168.70.2 # -D (dynamic): localhost:1080 becomes a SOCKS proxy
+ssh -X 192.168.70.2      # -X: X11 forwarding: remote GUI apps show on my screen
 #   needs X11Forwarding yes in sshd_config
 
 # -L  LOCAL:  bring a remote port to my machine
@@ -1345,26 +1345,26 @@ ssh -X 192.168.70.2          # -X: X11 forwarding: remote GUI apps show on my sc
 
 
 # ===== GPG =====
-gpg --gen-key                          # create key pair in ~/.gnupg/
-gpg --list-keys                        # list the keys in your keyring
-gpg --export jadi > jadi.pub.key       # share your public key (-a (armor) = ASCII text)
-gpg --import jadi.pub.key              # import someone's public key
-gpg --output jadi.revoke.asc --gen-revoke jadi@example.com   # revoke if key is stolen
+gpg --gen-key                    # create key pair in ~/.gnupg/
+gpg --list-keys                  # list the keys in your keyring
+gpg --export jadi > jadi.pub.key # share your public key (-a (armor) = ASCII text)
+gpg --import jadi.pub.key        # import someone's public key
+gpg --output jadi.revoke.asc --gen-revoke jadi@example.com # revoke if key is stolen
 
 # encrypt / decrypt
 gpg --out file.txt.encrypted --recipient jadi@example.com --encrypt file.txt # encrypt with jadi's public key
 gpg --out out.txt --decrypt file.txt.encrypted # decrypt with your private key
 
 # sign / verify
-gpg --output msg.sig --sign msg.txt    # sign with MY private key (binary)
-gpg --verify msg.sig                   # check signature with sender's public key
-gpg --output msg --decrypt msg.sig     # verify + get the content
-gpg --clearsign msg.txt                # -> msg.txt.asc: readable text + signature
+gpg --output msg.sig --sign msg.txt # sign with MY private key (binary)
+gpg --verify msg.sig                # check signature with sender's public key
+gpg --output msg --decrypt msg.sig  # verify + get the content
+gpg --clearsign msg.txt             # -> msg.txt.asc: readable text + signature
 
 # gpg-agent = like ssh-agent, keeps gpg key passphrases in memory
 
 # ============================================================
 # EXTRAS
 # ============================================================
-ssh-keygen -t ecdsa -b 521             # -b (bits) = key size in bits
+ssh-keygen -t ecdsa -b 521 # -b (bits) = key size in bits
 ```
