@@ -927,7 +927,7 @@ hosts: files dns               # first /etc/hosts, then DNS
 # hosts: dns files             # DNS first, /etc/hosts only if DNS does not know
 
 # ============================================================
-# PDF EXTRAS
+# EXTRAS
 # ============================================================
 # NAME PREFIXES:  en = Ethernet | wl = WLAN (wifi) | ww = WWAN | ib = InfiniBand | sl = serial
 # NAMING ORDER (Linux uses the first rule that works):
@@ -1003,7 +1003,7 @@ nc localhost 1337              # connect, type text -> shows on the listener
 dig google.com                 # SERVER: line shows which DNS answered
 
 # ============================================================
-# PDF EXTRAS
+# EXTRAS
 # ============================================================
 # LEGACY (net-tools)  ->  MODERN (iproute2)
 #   ifconfig          ->  ip addr / ip link
@@ -1059,7 +1059,7 @@ getent hosts dns1.lpi.org       # one name
 # asks the real servers from /etc/systemd/resolved.conf or /etc/resolv.conf
 
 # ============================================================
-# PDF EXTRAS
+# EXTRAS
 # ============================================================
 # resolv.conf limits:
 #   max 3 nameserver | max 6 search domains
@@ -1155,7 +1155,7 @@ sudo fuser -v 22/tcp    # -v (verbose): which process uses port 22
 nmap localhost          # scan ports 1-1000, show open ones
 
 # ============================================================
-# PDF EXTRAS
+# EXTRAS
 # ============================================================
 # find -perm, the 3 forms:
 find . -perm 4000       # ONLY SUID, exactly
@@ -1364,7 +1364,7 @@ gpg --clearsign msg.txt                # -> msg.txt.asc: readable text + signatu
 # gpg-agent = like ssh-agent, keeps gpg key passphrases in memory
 
 # ============================================================
-# PDF EXTRAS
+# EXTRAS
 # ============================================================
 ssh-keygen -t ecdsa -b 521             # -b (bits) = key size in bits
 ```
