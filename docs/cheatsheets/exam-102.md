@@ -86,7 +86,7 @@ expr 5 \* 4 # shows 20
 let result=10+3 # result = 13
 let "x = 5 * 4" # x = 20
 
-mail -s "subject" root # -s (subject). press Ctrl+D to send
+mail -s "subject" root                            # -s (subject). press Ctrl+D to send
 echo "the backup failed" | mail -s "subject" root # body from a pipe
 ```
 
@@ -235,8 +235,8 @@ xauth list # show X auth cookies
 	useradd -c "comment!!" bob          # -c (comment): comment
 
 # MODIFY / DELETE USERS
-	usermod -g devs bob # -g (lowercase): change bob's PRIMARY group to devs
-	usermod -G devs bob # -G (uppercase): set bob's SECONDARY groups (REPLACES all)
+	usermod -g devs bob  # -g (lowercase): change bob's PRIMARY group to devs
+	usermod -G devs bob  # -G (uppercase): set bob's SECONDARY groups (REPLACES all)
 	usermod -aG devs bob # -a (append) + -G: ADD to secondary groups, keeps existing
 
 	usermod -L bob                      # -L (Lock): lock password
@@ -264,14 +264,14 @@ xauth list # show X auth cookies
 	passwd -u bob                       # -u (unlock): unlock password
 
 # PASSWORD AGING
-	chage -l bob        # -l (list): show current aging info (read-only)
-	chage -M 90 bob     # -M (max): password must change after N days
-	chage -m 7 bob      # -m (min): must wait N days before changing again
-	chage -W 7 bob      # -W (warn): warn user N days before expiry
-	chage -I 14 bob     # -I (inactive): lock account N days after password expires
+	chage -l bob            # -l (list): show current aging info (read-only)
+	chage -M 90 bob         # -M (max): password must change after N days
+	chage -m 7 bob          # -m (min): must wait N days before changing again
+	chage -W 7 bob          # -W (warn): warn user N days before expiry
+	chage -I 14 bob         # -I (inactive): lock account N days after password expires
 	chage -E 2026-12-31 bob # -E (expire): account expiry DATE (or -1 = never)
-	chage -d 0 bob   # -d (date): last change date. 0 = force change at next login
-	chage bob        # interactive mode, asks each value one by one
+	chage -d 0 bob          # -d (date): last change date. 0 = force change at next login
+	chage bob               # interactive mode, asks each value one by one
 
 # LOOKUP
 	getent passwd bob                   # query user database
@@ -368,13 +368,13 @@ at -f script.sh 5pm # -f (file): run a script file at a time
 #   /etc/at.allow   /etc/at.deny   (same logic as cron.allow/cron.deny)
 
 # ===== SYSTEMD TIMERS (modern alternative) =====
-systemctl list-timers                 # show active timers
-systemd-run --on-active=10m mycommand # run once, 10 min from now
+systemctl list-timers                                      # show active timers
+systemd-run --on-active=10m mycommand                      # run once, 10 min from now
 systemd-run --on-calendar="20:00" /usr/bin/touch /tmp/test # run at 20:00
 # timer units use OnCalendar= for schedules (like cron)
 
 systemd-run --user --on-active=2m /bin/bash -c 'echo "systemd timerll!" > /home/amranich/test/timer' # --user: as your user, in 2 min
-systemctl --user list-timers # --user: show your own timers
+systemctl --user list-timers                                                                         # --user: show your own timers
 
 # Once you have created the new timer, you can enable it and start it by running the following commands as root:
 systemctl enable foobar.timer # start the timer at boot
@@ -849,9 +849,9 @@ grep -w ssh /etc/services # find the port of a service
 ip link show # list interfaces
 
 # ===== ifconfig (LEGACY, deprecated) =====
-ifconfig           # show active interfaces   (-a (all) = even down)
+ifconfig                                          # show active interfaces   (-a (all) = even down)
 ifconfig eth0 192.168.42.42 netmask 255.255.255.0 # set IP (root)
-ifconfig eth0 down # turn off  (up = on)
+ifconfig eth0 down                                # turn off  (up = on)
 
 # ===== ifup / ifdown (use saved config) =====
 ifup eth0   # bring interface up using its config file
@@ -997,7 +997,7 @@ dig google.com # SERVER: line shows which DNS answered
 
 # ROUTES
 ip route save > backup  |  ip route restore < backup # save the routing table / load it back
-ip neighbour # ARP / neighbor table
+ip neighbour                                         # ARP / neighbor table
 ```
 
 ## 109.4 Configure client side DNS
@@ -1176,7 +1176,7 @@ who -b     # -b (boot): last boot time  (-r runlevel, -H headings)
 last carol # one user only
 
 # sudo
-sudo -u carol cmd                       # -u (user): run as another user
+sudo -u carol cmd                                               # -u (user): run as another user
 carol ALL=(ALL:ALL) NOPASSWD: /usr/bin/systemctl status apache2 # no password asked
 # sudo remembers your password 15 min. change: Defaults timestamp_timeout=1
 # aliases: Host_Alias | User_Alias | Cmnd_Alias | Runas_Alias
@@ -1232,12 +1232,12 @@ sshd: LOCAL                         # in hosts.allow -> except local network
 # ALL = all services or all hosts
 
 # ===== REMOVE UNUSED SERVICES =====
-sudo service --status-all                   # SysV list: [+] running, [-] stopped
-sudo chkconfig vsftpd off                   # RedHat, old
-sudo update-rc.d vsftpd remove              # Debian, old
+sudo service --status-all                          # SysV list: [+] running, [-] stopped
+sudo chkconfig vsftpd off                          # RedHat, old
+sudo update-rc.d vsftpd remove                     # Debian, old
 systemctl list-units --state active --type service # list running services
-sudo systemctl disable vsftpd.service --now # systemd: stop now + off at boot
-ss -ltu    /  netstat -ltu                  # -l listening -t tcp -u udp: listening services (PDF)
+sudo systemctl disable vsftpd.service --now        # systemd: stop now + off at boot
+ss -ltu    /  netstat -ltu                         # -l listening -t tcp -u udp: listening services (PDF)
 
 # ===== /etc/inittab (SysV, old) =====
 # format:  id:runlevel:action:process
@@ -1321,15 +1321,15 @@ ssh -X 192.168.70.2      # -X: X11 forwarding: remote GUI apps show on my screen
 
 
 # ===== GPG =====
-gpg --gen-key                    # create key pair in ~/.gnupg/
-gpg --list-keys                  # list the keys in your keyring
-gpg --export jadi > jadi.pub.key # share your public key (-a (armor) = ASCII text)
-gpg --import jadi.pub.key        # import someone's public key
+gpg --gen-key                                              # create key pair in ~/.gnupg/
+gpg --list-keys                                            # list the keys in your keyring
+gpg --export jadi > jadi.pub.key                           # share your public key (-a (armor) = ASCII text)
+gpg --import jadi.pub.key                                  # import someone's public key
 gpg --output jadi.revoke.asc --gen-revoke jadi@example.com # revoke if key is stolen
 
 # encrypt / decrypt
 gpg --out file.txt.encrypted --recipient jadi@example.com --encrypt file.txt # encrypt with jadi's public key
-gpg --out out.txt --decrypt file.txt.encrypted # decrypt with your private key
+gpg --out out.txt --decrypt file.txt.encrypted                               # decrypt with your private key
 
 # sign / verify
 gpg --output msg.sig --sign msg.txt # sign with MY private key (binary)

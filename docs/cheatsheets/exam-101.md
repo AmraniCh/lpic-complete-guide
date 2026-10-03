@@ -145,7 +145,7 @@ systemctl isolate emergency.target          # switch to emergency mode now
 # SHUTDOWN
 shutdown -h now                # halt now
 shutdown -r now                # reboot now
-shutdown -r 60 "Rebooting!"   # reboot in 60 min, broadcast message
+shutdown -r 60 "Rebooting!"    # reboot in 60 min, broadcast message
 shutdown -c                    # cancel a scheduled shutdown
 halt                           # halt the system
 poweroff                       # halt + power off (ACPI signal)
@@ -209,8 +209,8 @@ wall "Server going down!"     # broadcast to all logged-in users
 # edit /etc/default/grub and scripts in /etc/grub.d/
 grub-mkconfig -o /boot/grub/grub.cfg     # regenerate config
 grub2-mkconfig -o /boot/grub2/grub.cfg   # Red Hat variant
-update-grub                               # Debian shortcut for grub-mkconfig
-grub-install /dev/sda                     # install GRUB to disk MBR/ESP
+update-grub                              # Debian shortcut for grub-mkconfig
+grub-install /dev/sda                    # install GRUB to disk MBR/ESP
 
 # GRUB2 partition naming
 # (hd0,1) or (hd0,msdos1) = first partition on first disk (MBR)
@@ -437,12 +437,12 @@ sort data.txt | uniq -c # uniq needs SORTED input. -c count each line | -u only 
 
 paste file1 file2 # join files side by side (column by column)
 
-echo "chakir" | tr c s # tr SET1 SET2: replace every 'c' with 's' -> "shakir"
+echo "chakir" | tr c s                      # tr SET1 SET2: replace every 'c' with 's' -> "shakir"
 echo "sss ccdd fdfds sss aaa" | tr -s 'sss' # -s (squeeze): collapse repeats of 's' into one
 
-sed 's/a/@/' data.txt # s/old/new/: replace FIRST 'a' with '@' per line (add trailing g for all)
-sed /a/d data.txt # /pattern/d: delete lines that contain 'a'
-sed -n /a/p data.txt # -n: print nothing by default | /a/p: print only lines matching 'a'
+sed 's/a/@/' data.txt                                   # s/old/new/: replace FIRST 'a' with '@' per line (add trailing g for all)
+sed /a/d data.txt                                       # /pattern/d: delete lines that contain 'a'
+sed -n /a/p data.txt                                    # -n: print nothing by default | /a/p: print only lines matching 'a'
 sed -e 's/apple/APPLE/' -e 's/cherry/CHERRY/' fruit.txt # -e: run several edits in one pass
 
 wc mydata # count lines, words, characters. -l (lines) -w (words) -c (chars)
@@ -450,7 +450,7 @@ wc mydata # count lines, words, characters. -l (lines) -w (words) -c (chars)
   # lines words characters mydata
 
 sha256sum data.txt > hash1 # compute the checksum and save it to hash1
-sha256sum -c hash1 # -c (check): verify the files still match the saved checksums
+sha256sum -c hash1         # -c (check): verify the files still match the saved checksums
 ```
 
 ---
@@ -460,30 +460,30 @@ sha256sum -c hash1 # -c (check): verify the files still match the saved checksum
 ```bash
 cp -i myfile1 myfile2 # -i interactive (ask before overwrite). -p preserve attributes
 mv -i myfile1 myfile2 # -i interactive (ask before overwrite). moves or renames
-rm myfile # remove a file. -r (recursive) for dirs, -f (force) no prompts
+rm myfile             # remove a file. -r (recursive) for dirs, -f (force) no prompts
 
-touch file2 # create empty file, or update timestamps if it exists
-touch -d 11am file2 # -d (date): set time from a human-readable date
+touch file2                    # create empty file, or update timestamps if it exists
+touch -d 11am file2            # -d (date): set time from a human-readable date
 touch -t 200908121510.59 file2 # -t (timestamp): set time as [[CC]YY]MMDDhhmm[.ss]
-touch -r file1 file2 # -r (reference): copy file1's timestamp onto file2
-touch -am file3 # -a (access time) -m (modification time): update these
+touch -r file1 file2           # -r (reference): copy file1's timestamp onto file2
+touch -am file3                # -a (access time) -m (modification time): update these
 
 dd if=/dev/sda of=backup.dd bs=4096 # if (input file), of (output file), bs (block size)
 
-find ~ -iname "hel*" # -iname: match name, case insensitive (-name = case sensitive)
+find ~ -iname "hel*"         # -iname: match name, case insensitive (-name = case sensitive)
 find ~ -iname "hel*" -type f # -type f: regular files only (d = directory)
-find ~/test -size +10M # -size +10M: larger than 10 megabytes
-find ~ -mmin -30 -ls # -mmin -30: modified < 30 min ago. -ls: long listing
+find ~/test -size +10M       # -size +10M: larger than 10 megabytes
+find ~ -mmin -30 -ls         # -mmin -30: modified < 30 min ago. -ls: long listing
 
-gzip file.txt # compress -> file.txt.gz (removes original). also bzip2, xz
+gzip file.txt      # compress -> file.txt.gz (removes original). also bzip2, xz
 gunzip file.txt.gz # decompress -> file.txt. also bunzip2, unxz
 
 tar -czf archive.tar.gz hash1 hash2 # -c (create) -z (gzip) -f (file): build the archive
-tar -xf archive.tar # -x (extract) -f (file): unpack here
-tar -xf archive.tar -C /tmp # -C (change dir): extract into /tmp
+tar -xf archive.tar                 # -x (extract) -f (file): unpack here
+tar -xf archive.tar -C /tmp         # -C (change dir): extract into /tmp
 
 ls | cpio -o > files.cpio # -o (copy-out): build an archive from a list of names
-mkdir extract # (plumbing: a folder to extract into)
+mkdir extract             # (plumbing: a folder to extract into)
 mv myarchivefind.cpio extract
 cd extract
 cpio -id < files.cpio # -i (copy-in): extract. -d: create directories as needed
@@ -497,7 +497,7 @@ cpio -id < files.cpio # -i (copy-in): extract. -d: create directories as needed
 # tr ' ' '@' <<END # here-documents
 # cat <<END > file1
 
-echo files.txt | xargs cat # xargs: turn stdin into ARGUMENTS (here runs: cat files.txt)
+echo files.txt | xargs cat                    # xargs: turn stdin into ARGUMENTS (here runs: cat files.txt)
 cat files.txt | xargs -I FILE touch _FILE.txt # -I FILE: placeholder, run once per input line
 
 ls | tee files.txt # tee: write to the file AND still show on stdout (unlike ls > files.txt)
@@ -508,18 +508,18 @@ ls | tee files.txt # tee: write to the file AND still show on stdout (unlike ls 
 ## 103.5 - Process Management
 
 ```bash
-xeyes # run a GUI app, then Ctrl+Z to suspend it (stops it, keeps the job)
-xclock # another GUI app. Ctrl+Z suspends it -> becomes a stopped job
+xeyes   # run a GUI app, then Ctrl+Z to suspend it (stops it, keeps the job)
+xclock  # another GUI app. Ctrl+Z suspends it -> becomes a stopped job
 jobs -l # list this shell's jobs. -l (long): also show the PID
-fg %1 # bring job 1 to the FOREGROUND
-bg %2 # resume job 2 in the BACKGROUND
+fg %1   # bring job 1 to the FOREGROUND
+bg %2   # resume job 2 in the BACKGROUND
 
-kill -9 2387 # send a signal to a PID. -9 KILL (force), -1 HUP, -15 TERM (default, clean)
+kill -9 2387   # send a signal to a PID. -9 KILL (force), -1 HUP, -15 TERM (default, clean)
 killall python # kill BY NAME: every process named python (default signal -15)
-pkill slee # kill by name PATTERN (partial match)
+pkill slee     # kill by name PATTERN (partial match)
 
-ps -ef # (UNIX style) -e (all processes) -f (full format)
-ps aux # (BSD style) a (all users) u (user-oriented) x (incl. no tty)
+ps -ef      # (UNIX style) -e (all processes) -f (full format)
+ps aux      # (BSD style) a (all users) u (user-oriented) x (incl. no tty)
 ps -u admin # -u (user): processes owned by admin
 
 pgrep sleep | xargs kill # pgrep: find PIDs by name, then pipe them to kill
@@ -531,9 +531,9 @@ free # show memory usage. -m (MB), -h (human), -g (GB)
 uptime # time, number of users, and load average (1, 5, 15 min)
 # 21:18:52 up  1:34,  5 users,  load average: 2.38, 2.64, 2.41
 
-watch free # re-run 'free' every 2s and show the latest output
+watch free                     # re-run 'free' every 2s and show the latest output
 watch 'df -h | grep nvme0n1p1' # quote the whole pipeline so watch runs all of it
-watch -n .5 free -b # -n (interval): every 0.5s. -b: show bytes
+watch -n .5 free -b            # -n (interval): every 0.5s. -b: show bytes
 ```
 
 ---
@@ -541,9 +541,9 @@ watch -n .5 free -b # -n (interval): every 0.5s. -b: show bytes
 ## 103.5 - Terminal Multiplexers
 
 ```bash
-screen # start a new screen session (keeps running after you disconnect)
-screen -d # -d: detach the session (or from inside: CTRL + a D)
-screen -ls # -ls: list running sessions
+screen         # start a new screen session (keeps running after you disconnect)
+screen -d      # -d: detach the session (or from inside: CTRL + a D)
+screen -ls     # -ls: list running sessions
 screen -r 8475 # -r: reattach to session 8475
 # kill with CTRL + a K
 
@@ -553,7 +553,7 @@ tmux # start a new tmux session
 # CTRL + B D => detach
 # CTRL + B & => kill
 # CTRL + B -> <- => navigation
-tmux ls # list sessions
+tmux ls       # list sessions
 tmux att -t 1 # att (attach) -t (target): attach to session 1
 ```
 
@@ -562,9 +562,9 @@ tmux att -t 1 # att (attach) -t (target): attach to session 1
 ## 103.6 - Process Priorities
 
 ```bash
-nice ls # get default 10
-nice -n 15 ls # 15 niceness
-sudo nice -n -20 # nice < 0 use sudo
+nice ls            # get default 10
+nice -n 15 ls      # 15 niceness
+sudo nice -n -20   # nice < 0 use sudo
 renice -n 2 497914 # IMPORTANT you need sudo if the new NICE < OLD_NICE
 ```
 
@@ -610,9 +610,9 @@ renice -n 2 497914 # IMPORTANT you need sudo if the new NICE < OLD_NICE
 - example: `fgrep '3.0' file.txt` (searches for literal "3.0", the dot is not "any character")
 
 ```bash
-grep 'hel*' /usr/share/dict/words # lines matching "he" + zero or more "l"
+grep 'hel*' /usr/share/dict/words    # lines matching "he" + zero or more "l"
 grep -c 'hel*' /usr/share/dict/words # count of matching lines
-grep -rl 192.168. /etc/cloud # filenames containing "192.168." recursively
+grep -rl 192.168. /etc/cloud         # filenames containing "192.168." recursively
 # -v: print lines that do NOT match
 
 sed -r "s/(Z|R|J)/starts with ZRJ/" friends.txt # -r to tell sed that we use regex
