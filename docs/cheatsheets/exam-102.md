@@ -143,8 +143,6 @@ xauth list # show X auth cookies
 ## 106.2 Graphical desktops
 
 ```bash
-# 106.2 - GRAPHICAL DESKTOPS
-
 # DESKTOP ENVIRONMENTS (full bundle: window manager + panels + apps)
 #   GNOME    default on Ubuntu/Fedora, uses Mutter
 #   KDE      feature-rich, uses KWin
