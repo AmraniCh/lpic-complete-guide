@@ -86,7 +86,7 @@ expr 5 \* 4 # shows 20
 let result=10+3 # result = 13
 let "x = 5 * 4" # x = 20
 
-mail -s "subject" root # -s (subject). press Ctrl+D to send
+mail -s "subject" root                            # -s (subject). press Ctrl+D to send
 echo "the backup failed" | mail -s "subject" root # body from a pipe
 ```
 
@@ -214,8 +214,6 @@ xauth list # show X auth cookies
 ## 107.1 Manage user and group accounts
 
 ```bash
-# 107.1 - MANAGE USER AND GROUP ACCOUNTS (weight 5)
-
 # KEY FILES
 	# /etc/passwd       user accounts
 	# /etc/shadow       password hashes + aging information
@@ -237,8 +235,8 @@ xauth list # show X auth cookies
 	useradd -c "comment!!" bob          # -c (comment): comment
 
 # MODIFY / DELETE USERS
-	usermod -g devs bob # -g (lowercase): change bob's PRIMARY group to devs
-	usermod -G devs bob # -G (uppercase): set bob's SECONDARY groups (REPLACES all)
+	usermod -g devs bob  # -g (lowercase): change bob's PRIMARY group to devs
+	usermod -G devs bob  # -G (uppercase): set bob's SECONDARY groups (REPLACES all)
 	usermod -aG devs bob # -a (append) + -G: ADD to secondary groups, keeps existing
 
 	usermod -L bob                      # -L (Lock): lock password
@@ -266,14 +264,14 @@ xauth list # show X auth cookies
 	passwd -u bob                       # -u (unlock): unlock password
 
 # PASSWORD AGING
-	chage -l bob        # -l (list): show current aging info (read-only)
-	chage -M 90 bob     # -M (max): password must change after N days
-	chage -m 7 bob      # -m (min): must wait N days before changing again
-	chage -W 7 bob      # -W (warn): warn user N days before expiry
-	chage -I 14 bob     # -I (inactive): lock account N days after password expires
+	chage -l bob            # -l (list): show current aging info (read-only)
+	chage -M 90 bob         # -M (max): password must change after N days
+	chage -m 7 bob          # -m (min): must wait N days before changing again
+	chage -W 7 bob          # -W (warn): warn user N days before expiry
+	chage -I 14 bob         # -I (inactive): lock account N days after password expires
 	chage -E 2026-12-31 bob # -E (expire): account expiry DATE (or -1 = never)
-	chage -d 0 bob   # -d (date): last change date. 0 = force change at next login
-	chage bob        # interactive mode, asks each value one by one
+	chage -d 0 bob          # -d (date): last change date. 0 = force change at next login
+	chage bob               # interactive mode, asks each value one by one
 
 # LOOKUP
 	getent passwd bob                   # query user database
@@ -370,13 +368,13 @@ at -f script.sh 5pm # -f (file): run a script file at a time
 #   /etc/at.allow   /etc/at.deny   (same logic as cron.allow/cron.deny)
 
 # ===== SYSTEMD TIMERS (modern alternative) =====
-systemctl list-timers                 # show active timers
-systemd-run --on-active=10m mycommand # run once, 10 min from now
+systemctl list-timers                                      # show active timers
+systemd-run --on-active=10m mycommand                      # run once, 10 min from now
 systemd-run --on-calendar="20:00" /usr/bin/touch /tmp/test # run at 20:00
 # timer units use OnCalendar= for schedules (like cron)
 
 systemd-run --user --on-active=2m /bin/bash -c 'echo "systemd timerll!" > /home/amranich/test/timer' # --user: as your user, in 2 min
-systemctl --user list-timers # --user: show your own timers
+systemctl --user list-timers                                                                         # --user: show your own timers
 
 # Once you have created the new timer, you can enable it and start it by running the following commands as root:
 systemctl enable foobar.timer # start the timer at boot
@@ -455,8 +453,6 @@ iconv -f UTF-8 -t ASCII//TRANSLIT test.txt > ascii.txt # TRANSLIT: replace speci
 ## 108.1 Maintain system time
 
 ```bash
-# 108.1 - MAINTAIN SYSTEM TIME (weight 3)
-
 # System clock = kernel, runs while ON.   Hardware clock (RTC = Real Time Clock) = battery, runs while OFF.
 # Keep hardware clock in UTC (Coordinated Universal Time). Local time = UTC + timezone.
 #   --systohc : system -> hardware      --hctosys : hardware -> system
@@ -520,8 +516,6 @@ chronyc makestep # force an immediate step
 ## 108.2 System logging
 
 ```bash
-# 108.2 - SYSTEM LOGGING (weight 4)
-
 # Logging = collect messages from the kernel, services and apps, and store them (usually /var/log).
 # TWO systems:
 #   rsyslog          = classic logging daemon, writes plain TEXT files in /var/log
@@ -691,8 +685,6 @@ journalctl -D /mnt/broken/var/log/journal/
 ## 108.3 Mail Transfer Agent (MTA) basics
 
 ```bash
-# 108.3 - MTA (Mail Transfer Agent) BASICS (weight 3)
-
 # MTA = moves mail (server)   |   MUA (Mail User Agent) = mail client (mail, Thunderbird)
 
 # ===== MTAs =====
@@ -737,8 +729,6 @@ sendmail -q # -q (queue): retry now
 ## 108.4 Manage printers and printing
 
 ```bash
-# 108.4 - MANAGE PRINTERS AND PRINTING (weight 2)
-
 # CUPS (Common Unix Printing System) = the printing system on most distros. daemon: cupsd
 
 # ===== INSTALL / START =====
@@ -781,8 +771,6 @@ cupsdisable MyPrinter -r "need more paper" # printing OFF. -r (reason)
 ## 109.1 Fundamentals of internet protocols
 
 ```bash
-# 109.1 - FUNDAMENTALS OF INTERNET PROTOCOLS (weight 4)
-
 # TCP/IP = the protocol stack of the Internet. includes TCP, UDP, ICMP, DNS ...
 
 # ===== IPv4 =====
@@ -854,8 +842,6 @@ grep -w ssh /etc/services # find the port of a service
 ## 109.2 Persistent network configuration
 
 ```bash
-# 109.2 - PERSISTENT NETWORK CONFIGURATION (weight 4)
-
 # ===== NETWORK INTERFACES =====
 # NIC (Network Interface Card) = the network hardware
 # old names: eth0, eth1, wlan0      new names: eno1, ens1, enp3s5, wlp3s0
@@ -863,9 +849,9 @@ grep -w ssh /etc/services # find the port of a service
 ip link show # list interfaces
 
 # ===== ifconfig (LEGACY, deprecated) =====
-ifconfig           # show active interfaces   (-a (all) = even down)
+ifconfig                                          # show active interfaces   (-a (all) = even down)
 ifconfig eth0 192.168.42.42 netmask 255.255.255.0 # set IP (root)
-ifconfig eth0 down # turn off  (up = on)
+ifconfig eth0 down                                # turn off  (up = on)
 
 # ===== ifup / ifdown (use saved config) =====
 ifup eth0   # bring interface up using its config file
@@ -957,8 +943,6 @@ nmcli radio wifi off                     # turn wifi off  (on = back)
 ## 109.3 Basic network troubleshooting
 
 ```bash
-# 109.3 - BASIC NETWORK TROUBLESHOOTING (weight 4)
-
 # ===== TROUBLESHOOTING STEPS ("I cannot open webpages") =====
 #   1. interface UP + has IP?     ip addr
 #   2. can I reach the gateway?   ping <gateway>
@@ -1013,14 +997,12 @@ dig google.com # SERVER: line shows which DNS answered
 
 # ROUTES
 ip route save > backup  |  ip route restore < backup # save the routing table / load it back
-ip neighbour # ARP / neighbor table
+ip neighbour                                         # ARP / neighbor table
 ```
 
 ## 109.4 Configure client side DNS
 
 ```bash
-# 109.4 - CONFIGURE CLIENT SIDE DNS (weight 2)
-
 # DNS (Domain Name System) = turns names into IPs  (yahoo.com -> 206.190.36.45)
 
 # ===== /etc/resolv.conf (which DNS server to use) =====
@@ -1088,8 +1070,6 @@ getent group openldap                  # works for users/groups too, not just ho
 ## 110.1 Perform security administration tasks
 
 ```bash
-# 110.1 - PERFORM SECURITY ADMINISTRATION TASKS (weight 3)
-
 # ===== su vs sudo =====
 su -       # become root. asks ROOT's password. "-" = load target's environment
 su - carol # become carol. asks CAROL's password
@@ -1196,7 +1176,7 @@ who -b     # -b (boot): last boot time  (-r runlevel, -H headings)
 last carol # one user only
 
 # sudo
-sudo -u carol cmd                       # -u (user): run as another user
+sudo -u carol cmd                                               # -u (user): run as another user
 carol ALL=(ALL:ALL) NOPASSWD: /usr/bin/systemctl status apache2 # no password asked
 # sudo remembers your password 15 min. change: Defaults timestamp_timeout=1
 # aliases: Host_Alias | User_Alias | Cmnd_Alias | Runas_Alias
@@ -1208,8 +1188,6 @@ ADMINS ALL = SERVICES
 ## 110.2 Setup host security
 
 ```bash
-# 110.2 - SETUP HOST SECURITY (weight 3)
-
 # ===== SHADOW PASSWORDS =====
 # problem: /etc/passwd must be readable by ALL users -> hashes would be visible
 # fix: hash moves to /etc/shadow, passwd shows only "x"
@@ -1254,12 +1232,12 @@ sshd: LOCAL                         # in hosts.allow -> except local network
 # ALL = all services or all hosts
 
 # ===== REMOVE UNUSED SERVICES =====
-sudo service --status-all                   # SysV list: [+] running, [-] stopped
-sudo chkconfig vsftpd off                   # RedHat, old
-sudo update-rc.d vsftpd remove              # Debian, old
+sudo service --status-all                          # SysV list: [+] running, [-] stopped
+sudo chkconfig vsftpd off                          # RedHat, old
+sudo update-rc.d vsftpd remove                     # Debian, old
 systemctl list-units --state active --type service # list running services
-sudo systemctl disable vsftpd.service --now # systemd: stop now + off at boot
-ss -ltu    /  netstat -ltu                  # -l listening -t tcp -u udp: listening services (PDF)
+sudo systemctl disable vsftpd.service --now        # systemd: stop now + off at boot
+ss -ltu    /  netstat -ltu                         # -l listening -t tcp -u udp: listening services (PDF)
 
 # ===== /etc/inittab (SysV, old) =====
 # format:  id:runlevel:action:process
@@ -1271,8 +1249,6 @@ id:3:initdefault:                  # boot into runlevel 3
 ## 110.3 Securing data with encryption
 
 ```bash
-# 110.3 - SECURING DATA WITH ENCRYPTION (weight 4)
-
 # ===== KEY PAIRS =====
 # symmetric  = one shared password encrypts AND decrypts
 # asymmetric = key PAIR: what one key locks, only the other opens
@@ -1345,15 +1321,15 @@ ssh -X 192.168.70.2      # -X: X11 forwarding: remote GUI apps show on my screen
 
 
 # ===== GPG =====
-gpg --gen-key                    # create key pair in ~/.gnupg/
-gpg --list-keys                  # list the keys in your keyring
-gpg --export jadi > jadi.pub.key # share your public key (-a (armor) = ASCII text)
-gpg --import jadi.pub.key        # import someone's public key
+gpg --gen-key                                              # create key pair in ~/.gnupg/
+gpg --list-keys                                            # list the keys in your keyring
+gpg --export jadi > jadi.pub.key                           # share your public key (-a (armor) = ASCII text)
+gpg --import jadi.pub.key                                  # import someone's public key
 gpg --output jadi.revoke.asc --gen-revoke jadi@example.com # revoke if key is stolen
 
 # encrypt / decrypt
 gpg --out file.txt.encrypted --recipient jadi@example.com --encrypt file.txt # encrypt with jadi's public key
-gpg --out out.txt --decrypt file.txt.encrypted # decrypt with your private key
+gpg --out out.txt --decrypt file.txt.encrypted                               # decrypt with your private key
 
 # sign / verify
 gpg --output msg.sig --sign msg.txt # sign with MY private key (binary)
