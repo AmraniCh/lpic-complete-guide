@@ -46,6 +46,7 @@ tools/                 All project scripts live here.
 docs/                  The pages themselves.
   index.md               Home
   exam-101/, exam-102/   One folder per topic
+  cheatsheets/           Condensed per-exam command references
   style-guide.md         How pages are written here
   stylesheets/           The terminal skin
 ```
