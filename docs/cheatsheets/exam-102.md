@@ -501,13 +501,13 @@ systemctl status systemd-timesyncd # is it running?
 systemctl enable ntpd && systemctl start ntpd # start at boot, and start now
 # /etc/ntp.conf :  server 0.centos.pool.ntp.org iburst   (iburst = faster first sync)
 # pool.ntp.org = free volunteer server pool, DNS (Domain Name System) gives a random one (spreads load)
-# NTP is UDP (User Datagram Protocol) port 123  (PDF wrongly says TCP)
+# NTP is UDP (User Datagram Protocol) port 123
 ntpdate pool.ntp.org                          # one-time manual sync (stop ntpd first; used when offset >17min)
 ntpq -p                                       # ntpq (NTP query) -p (peers): show servers; * = server in use, -n (numeric) = show IPs
 
 # --- chrony (modern alternative) ---
 # chronyd = daemon,  chronyc = client (c = command line)
-# config: /etc/chrony.conf (RHEL, PDF) | /etc/chrony/chrony.conf (Debian/Ubuntu). "!" = disabled line
+# config: /etc/chrony.conf (RHEL) | /etc/chrony/chrony.conf (Debian/Ubuntu). "!" = disabled line
 chronyc tracking # how well synced (offset, stratum, drift)
 chronyc sources  # which servers it uses
 chronyc makestep # force an immediate step
@@ -692,8 +692,8 @@ journalctl -D /mnt/broken/var/log/journal/
 #   exim       general and flexible, strong checks on incoming mail (ACLs, authentication)
 #   postfix    newer alternative to sendmail, easy config files, multi-domain, encryption
 #              -> default MTA on most distros
-#   qmail      (PDF only, just the name)
-# most desktop distros install NO MTA by default. Jadi suggests: postfix + mailx (or bsd-mailx)
+#   qmail      another MTA, just know the name
+# most desktop distros install NO MTA by default. good choice: postfix + mailx (or bsd-mailx)
 
 # ===== sendmail EMULATION LAYER =====
 # every MTA copies sendmail's commands -> sendmail, mailq, newaliases work on ANY MTA
@@ -719,7 +719,7 @@ mail -a file.gz user@host              # -a (attach)
 mailq       # show stuck mail + reason (= sendmail -bp)
 sendmail -q # -q (queue): retry now
 
-# ===== PDF extras =====
+# ===== EXTRAS =====
 # SMTP = TCP port 25
 # queue: /var/spool/mqueue/ (sendmail) | /var/spool/postfix/
 # inbox: /var/spool/mail/<user> | /var/mail/<user>
@@ -739,7 +739,7 @@ sudo systemctl start cups.service # start CUPS now
 # /etc/cups/cupsd.conf      main config.  Listen localhost:631 = listen on port 631
 # /etc/cups/printers.conf   all printers. written by cupsd, DO NOT edit while cupsd runs
 # /etc/cups/ppd/            PPD files (PostScript Printer Description) = text file describing each printer's features
-# /var/log/cups/            access_log, error_log (+ page_log in PDF)
+# /var/log/cups/            access_log, error_log, page_log
 
 # ===== WEB INTERFACE =====
 # cupsd.conf: WebInterface Yes  ->  http://localhost:631
@@ -781,8 +781,8 @@ cupsdisable MyPrinter -r "need more paper" # printing OFF. -r (reason)
 #   A   1-126     255.0.0.0     /8
 #   B   128-191   255.255.0.0   /16
 #   C   192-223   255.255.255.0 /24
-#   127.x.x.x = loopback (127.0.0.1)          (PDF)
-#   224+      = multicast, not for hosts      (PDF)
+#   127.x.x.x = loopback (127.0.0.1)
+#   224+      = multicast, not for hosts
 
 # PRIVATE RANGES (not routed on the Internet)
 #   10.0.0.0      - 10.255.255.255     (/8,  16M IPs)
@@ -810,12 +810,12 @@ ipcalc 192.168.4.12/24 # calculates it for you
 
 # ===== PORTS =====
 # port = which program gets the packet. 0-65535
-#   1-1023 = services (privileged)   |   1024+ = clients        (PDF)
+#   1-1023 = services (privileged)   |   1024+ = clients
 # full list: /etc/services
 #   20,21 FTP      53  DNS      139 NetBIOS    389 LDAP    636 LDAPS
 #   22    SSH      80  HTTP     143 IMAP       443 HTTPS   993 IMAPS
 #   23    Telnet   110 POP3     161,162 SNMP   465 SMTPS   995 POP3S
-#   25    SMTP     123 NTP      514 Syslog (PDF)
+#   25    SMTP     123 NTP      514 Syslog
 # tip: above 400 + ends in S = Secure
 
 # ===== /etc/services =====
@@ -890,7 +890,7 @@ nmcli device wifi connect MyWifi password MyPass # connect to a wifi network
 hostnamectl set-hostname mycoolmachine          # sets all 3 types
 hostnamectl --pretty set-hostname "LAN Storage" # nice name, spaces allowed
 hostnamectl --transient set-hostname temp       # temporary
-hostnamectl --static set-hostname firewall      # ONLY static (PDF)
+hostnamectl --static set-hostname firewall      # ONLY static
 hostnamectl                                     # show status
 # only the STATIC name is saved in /etc/hostname
 
@@ -905,7 +905,7 @@ nameserver 192.168.1.1        # DNS server. up to 3
 nameserver 4.2.2.4            # fallback
 domain nagato.net             # local domain -> short names work
 search nagato.net company.com # domains to try for short names
-# NOTE: Jadi's page writes "resolve.conf". Correct name is resolv.conf (no e)
+# NOTE: the file is resolv.conf (no e), not resolve.conf
 
 # ===== /etc/nsswitch.conf =====
 # says WHERE and in WHICH ORDER to look up names, users, groups
@@ -1237,7 +1237,7 @@ sudo chkconfig vsftpd off                          # RedHat, old
 sudo update-rc.d vsftpd remove                     # Debian, old
 systemctl list-units --state active --type service # list running services
 sudo systemctl disable vsftpd.service --now        # systemd: stop now + off at boot
-ss -ltu    /  netstat -ltu                         # -l listening -t tcp -u udp: listening services (PDF)
+ss -ltu    /  netstat -ltu                         # -l listening -t tcp -u udp: listening services
 
 # ===== /etc/inittab (SysV, old) =====
 # format:  id:runlevel:action:process
