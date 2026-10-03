@@ -246,7 +246,7 @@ ldconfig                       # rebuild the cache after changing ld.so.conf
 ldconfig -p                    # -p (print): show cached libraries
 
 # LD_LIBRARY_PATH (override library search path)
-export LD_LIBRARY_PATH=/usr/lib/myoldlibs:/home/jadi/libs/
+export LD_LIBRARY_PATH=/usr/lib/myoldlibs:/home/nagato/libs/
 # searched BEFORE system libraries, useful for testing or old software
 
 # SEARCH ORDER

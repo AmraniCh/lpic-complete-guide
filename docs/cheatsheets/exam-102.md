@@ -96,7 +96,7 @@ The graphical stack, from top (user) to bottom (hardware):
 
 ```
                     User
-             (You, Jadi, Yoda, ...)
+             (You, Nagato, Yoda, ...)
                   /        \
                  /          \
       Desktop Manager    Window Manager
@@ -901,10 +901,10 @@ hostnamectl                                     # show status
 192.168.1.10   foo.mydomain.org  foo # extra names = aliases
 
 # ===== /etc/resolv.conf (DNS) =====
-nameserver 192.168.1.1      # DNS server. up to 3
-nameserver 4.2.2.4          # fallback
-domain jadi.net             # local domain -> short names work
-search jadi.net company.com # domains to try for short names
+nameserver 192.168.1.1        # DNS server. up to 3
+nameserver 4.2.2.4            # fallback
+domain nagato.net             # local domain -> short names work
+search nagato.net company.com # domains to try for short names
 # NOTE: Jadi's page writes "resolve.conf". Correct name is resolv.conf (no e)
 
 # ===== /etc/nsswitch.conf =====
@@ -1084,7 +1084,7 @@ sudo -u carol ping 8.8.8.8 # -u (user): run as carol
 root    ALL=(ALL:ALL) ALL   # user  host=(as_user:as_group)  commands
 %sudo   ALL=(ALL:ALL) ALL   # %  = a group
 %admin  ALL=(ALL) ALL
-jadi    ALL=(ALL) /bin/ping # jadi can run ONLY ping as root
+nagato  ALL=(ALL) /bin/ping # nagato can run ONLY ping as root
 #includedir /etc/sudoers.d  # extra files, preferred place for your rules
 visudo                      # checks syntax before saving. a broken sudoers = no sudo
 
@@ -1095,17 +1095,17 @@ last                  # past logins, newest first. reads /var/log/wtmp
 last -f /var/log/btmp # -f (file): FAILED logins (same as: lastb)
 
 # ===== passwd =====
-passwd           # change your own password
-sudo passwd jadi # change another user's password
-passwd -S        # -S (Status): jadi P 2023-09-14 0 99999 7 -1
+passwd             # change your own password
+sudo passwd nagato # change another user's password
+passwd -S          # -S (Status): nagato P 2023-09-14 0 99999 7 -1
 #   P = has password | L = locked | NP = no password
-passwd -l jadi   # -l (lock)    (-u unlock, -e expire)
+passwd -l nagato # -l (lock)    (-u unlock, -e expire)
 # shell, home... -> use usermod, not passwd
 
 # ===== chage (password aging) =====
-chage -l jadi   # -l (list): list aging info
-chage jadi      # interactive mode (root)
-chage -m 7 jadi # -m (min): min days between changes  (-M = max days)
+chage -l nagato   # -l (list): list aging info
+chage nagato      # interactive mode (root)
+chage -m 7 nagato # -m (min): min days between changes  (-M = max days)
 
 # ===== SUID / SGID =====
 # SUID (s in user part) = runs as the file OWNER, not as the runner
@@ -1191,10 +1191,10 @@ ADMINS ALL = SERVICES
 # ===== SHADOW PASSWORDS =====
 # problem: /etc/passwd must be readable by ALL users -> hashes would be visible
 # fix: hash moves to /etc/shadow, passwd shows only "x"
-ls -l /etc/passwd     # -rw-r--r--  root root     everyone can read
-ls -l /etc/shadow     # -rw-r-----  root shadow   only root (and group shadow)
-grep jadi /etc/passwd # jadi:x:1000:1000:jadi,,,:/home/jadi:/bin/bash
-grep jadi /etc/shadow # Permission denied  -> needs sudo
+ls -l /etc/passwd       # -rw-r--r--  root root     everyone can read
+ls -l /etc/shadow       # -rw-r-----  root shadow   only root (and group shadow)
+grep nagato /etc/passwd # nagato:x:1000:1000:nagato,,,:/home/nagato:/bin/bash
+grep nagato /etc/shadow # Permission denied  -> needs sudo
 
 # ===== /etc/nologin (maintenance) =====
 # file exists -> nobody can log in, its text is shown to them. delete it -> logins work again
@@ -1321,15 +1321,15 @@ ssh -X 192.168.70.2      # -X: X11 forwarding: remote GUI apps show on my screen
 
 
 # ===== GPG =====
-gpg --gen-key                                              # create key pair in ~/.gnupg/
-gpg --list-keys                                            # list the keys in your keyring
-gpg --export jadi > jadi.pub.key                           # share your public key (-a (armor) = ASCII text)
-gpg --import jadi.pub.key                                  # import someone's public key
-gpg --output jadi.revoke.asc --gen-revoke jadi@example.com # revoke if key is stolen
+gpg --gen-key                                                  # create key pair in ~/.gnupg/
+gpg --list-keys                                                # list the keys in your keyring
+gpg --export nagato > nagato.pub.key                           # share your public key (-a (armor) = ASCII text)
+gpg --import nagato.pub.key                                    # import someone's public key
+gpg --output nagato.revoke.asc --gen-revoke nagato@example.com # revoke if key is stolen
 
 # encrypt / decrypt
-gpg --out file.txt.encrypted --recipient jadi@example.com --encrypt file.txt # encrypt with jadi's public key
-gpg --out out.txt --decrypt file.txt.encrypted                               # decrypt with your private key
+gpg --out file.txt.encrypted --recipient nagato@example.com --encrypt file.txt # encrypt with nagato's public key
+gpg --out out.txt --decrypt file.txt.encrypted                                 # decrypt with your private key
 
 # sign / verify
 gpg --output msg.sig --sign msg.txt # sign with MY private key (binary)
