@@ -214,8 +214,6 @@ xauth list # show X auth cookies
 ## 107.1 Manage user and group accounts
 
 ```bash
-# 107.1 - MANAGE USER AND GROUP ACCOUNTS (weight 5)
-
 # KEY FILES
 	# /etc/passwd       user accounts
 	# /etc/shadow       password hashes + aging information
@@ -455,8 +453,6 @@ iconv -f UTF-8 -t ASCII//TRANSLIT test.txt > ascii.txt # TRANSLIT: replace speci
 ## 108.1 Maintain system time
 
 ```bash
-# 108.1 - MAINTAIN SYSTEM TIME (weight 3)
-
 # System clock = kernel, runs while ON.   Hardware clock (RTC = Real Time Clock) = battery, runs while OFF.
 # Keep hardware clock in UTC (Coordinated Universal Time). Local time = UTC + timezone.
 #   --systohc : system -> hardware      --hctosys : hardware -> system
@@ -520,8 +516,6 @@ chronyc makestep # force an immediate step
 ## 108.2 System logging
 
 ```bash
-# 108.2 - SYSTEM LOGGING (weight 4)
-
 # Logging = collect messages from the kernel, services and apps, and store them (usually /var/log).
 # TWO systems:
 #   rsyslog          = classic logging daemon, writes plain TEXT files in /var/log
@@ -691,8 +685,6 @@ journalctl -D /mnt/broken/var/log/journal/
 ## 108.3 Mail Transfer Agent (MTA) basics
 
 ```bash
-# 108.3 - MTA (Mail Transfer Agent) BASICS (weight 3)
-
 # MTA = moves mail (server)   |   MUA (Mail User Agent) = mail client (mail, Thunderbird)
 
 # ===== MTAs =====
@@ -737,8 +729,6 @@ sendmail -q # -q (queue): retry now
 ## 108.4 Manage printers and printing
 
 ```bash
-# 108.4 - MANAGE PRINTERS AND PRINTING (weight 2)
-
 # CUPS (Common Unix Printing System) = the printing system on most distros. daemon: cupsd
 
 # ===== INSTALL / START =====
@@ -781,8 +771,6 @@ cupsdisable MyPrinter -r "need more paper" # printing OFF. -r (reason)
 ## 109.1 Fundamentals of internet protocols
 
 ```bash
-# 109.1 - FUNDAMENTALS OF INTERNET PROTOCOLS (weight 4)
-
 # TCP/IP = the protocol stack of the Internet. includes TCP, UDP, ICMP, DNS ...
 
 # ===== IPv4 =====
@@ -854,8 +842,6 @@ grep -w ssh /etc/services # find the port of a service
 ## 109.2 Persistent network configuration
 
 ```bash
-# 109.2 - PERSISTENT NETWORK CONFIGURATION (weight 4)
-
 # ===== NETWORK INTERFACES =====
 # NIC (Network Interface Card) = the network hardware
 # old names: eth0, eth1, wlan0      new names: eno1, ens1, enp3s5, wlp3s0
@@ -957,8 +943,6 @@ nmcli radio wifi off                     # turn wifi off  (on = back)
 ## 109.3 Basic network troubleshooting
 
 ```bash
-# 109.3 - BASIC NETWORK TROUBLESHOOTING (weight 4)
-
 # ===== TROUBLESHOOTING STEPS ("I cannot open webpages") =====
 #   1. interface UP + has IP?     ip addr
 #   2. can I reach the gateway?   ping <gateway>
@@ -1019,8 +1003,6 @@ ip neighbour # ARP / neighbor table
 ## 109.4 Configure client side DNS
 
 ```bash
-# 109.4 - CONFIGURE CLIENT SIDE DNS (weight 2)
-
 # DNS (Domain Name System) = turns names into IPs  (yahoo.com -> 206.190.36.45)
 
 # ===== /etc/resolv.conf (which DNS server to use) =====
@@ -1088,8 +1070,6 @@ getent group openldap                  # works for users/groups too, not just ho
 ## 110.1 Perform security administration tasks
 
 ```bash
-# 110.1 - PERFORM SECURITY ADMINISTRATION TASKS (weight 3)
-
 # ===== su vs sudo =====
 su -       # become root. asks ROOT's password. "-" = load target's environment
 su - carol # become carol. asks CAROL's password
@@ -1208,8 +1188,6 @@ ADMINS ALL = SERVICES
 ## 110.2 Setup host security
 
 ```bash
-# 110.2 - SETUP HOST SECURITY (weight 3)
-
 # ===== SHADOW PASSWORDS =====
 # problem: /etc/passwd must be readable by ALL users -> hashes would be visible
 # fix: hash moves to /etc/shadow, passwd shows only "x"
@@ -1271,8 +1249,6 @@ id:3:initdefault:                  # boot into runlevel 3
 ## 110.3 Securing data with encryption
 
 ```bash
-# 110.3 - SECURING DATA WITH ENCRYPTION (weight 4)
-
 # ===== KEY PAIRS =====
 # symmetric  = one shared password encrypts AND decrypts
 # asymmetric = key PAIR: what one key locks, only the other opens
